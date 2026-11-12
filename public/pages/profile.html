@@ -1,0 +1,296 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#090b18">
+  <title>My Space | NOVARA</title>
+  <link rel="stylesheet" href="../styles.css">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    .profile-hero {
+      max-width: 1050px;
+      margin: auto;
+      padding: 75px 20px 35px;
+    }
+    .profile-banner {
+      position: relative;
+      padding: 35px;
+      border: 1px solid #ffffff18;
+      border-radius: 25px;
+      overflow: hidden;
+      background: linear-gradient(120deg,#35205f,#151a37 65%,#123b50);
+    }
+    .profile-banner:after {
+      content: "";
+      position: absolute;
+      width: 250px;
+      height: 250px;
+      border-radius: 50%;
+      background: #a855f755;
+      filter: blur(75px);
+      right: 0;
+      top: -100px;
+    }
+    .profile-top {
+      display: flex;
+      align-items: center;
+      gap: 22px;
+      position: relative;
+      z-index: 1;
+    }
+    .profile-avatar {
+      width: 90px;
+      height: 90px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      font-size: 38px;
+      font-weight: 800;
+      background: linear-gradient(135deg,#a78bfa,#40c8e5);
+      border: 4px solid #ffffff55;
+      color: white;
+    }
+    .profile-details h1 {
+      font: 700 clamp(25px,5vw,36px) "Space Grotesk",sans-serif;
+      margin: 0 0 5px;
+    }
+    .profile-details p {
+      color: #d0c9e8;
+      margin: 0;
+      font-size: 13px;
+    }
+    .profile-badge {
+      display: inline-block;
+      margin-top: 12px;
+      padding: 6px 12px;
+      border-radius: 20px;
+      background: #ffffff18;
+      font-size: 11px;
+      font-weight: 700;
+    }
+    .profile-stats {
+      display: grid;
+      grid-template-columns: repeat(3,1fr);
+      gap: 13px;
+      margin-top: 22px;
+      position: relative;
+      z-index: 1;
+    }
+    .stat-box {
+      background: #080b1b66;
+      border: 1px solid #ffffff16;
+      border-radius: 15px;
+      padding: 17px;
+    }
+    .stat-box small {
+      color: #b8b4d0;
+      display: block;
+      font-size: 11px;
+    }
+    .stat-box strong {
+      display: block;
+      font: 700 24px "Space Grotesk",sans-serif;
+      margin-top: 5px;
+    }
+    .profile-content {
+      max-width: 1050px;
+      padding: 10px 20px 90px;
+      margin: auto;
+    }
+    .profile-section {
+      margin-top: 38px;
+    }
+    .profile-section h2 {
+      font: 700 23px "Space Grotesk",sans-serif;
+      margin-bottom: 17px;
+    }
+    .profile-grid {
+      display: grid;
+      grid-template-columns: repeat(2,1fr);
+      gap: 15px;
+    }
+    .profile-card {
+      padding: 22px;
+      border: 1px solid #ffffff14;
+      background: #ffffff08;
+      border-radius: 18px;
+    }
+    .profile-card .card-icon {
+      font-size: 27px;
+      margin-bottom: 12px;
+    }
+    .profile-card h3 {
+      margin: 0 0 7px;
+      font-size: 16px;
+    }
+    .profile-card p {
+      color: #a5a8bb;
+      font-size: 12px;
+      line-height: 1.6;
+      margin: 0;
+    }
+    .profile-card button {
+      margin-top: 16px;
+      padding: 9px 15px;
+      border: 1px solid #ffffff25;
+      background: #8b5cf622;
+      color: white;
+      border-radius: 9px;
+      cursor: pointer;
+      font-weight: 700;
+      font-family: inherit;
+    }
+    .activity-empty {
+      padding: 30px;
+      text-align: center;
+      border: 1px dashed #ffffff25;
+      border-radius: 18px;
+      color: #a5a8bb;
+      font-size: 13px;
+      line-height: 1.7;
+    }
+    .activity-empty strong {
+      display: block;
+      color: white;
+      font-size: 16px;
+      margin-bottom: 5px;
+    }
+    .profile-note {
+      margin-top: 20px;
+      color: #85899f;
+      font-size: 12px;
+      line-height: 1.6;
+    }
+    @media(max-width:600px) {
+      .profile-banner {padding: 23px 17px;}
+      .profile-top {gap: 14px;}
+      .profile-avatar {width: 68px;height: 68px;font-size: 28px;}
+      .profile-stats {gap: 7px;}
+      .stat-box {padding: 12px 9px;}
+      .stat-box strong {font-size: 19px;}
+      .stat-box small {font-size: 10px;}
+      .profile-grid {grid-template-columns: 1fr;}
+    }
+  </style>
+</head>
+
+<body>
+  <div class="background-effects">
+    <div class="orb orb-one"></div>
+    <div class="orb orb-two"></div>
+    <div class="grid-overlay"></div>
+  </div>
+
+  <nav class="navbar">
+    <a href="../index.html" class="logo">NOVA<span>RA.</span></a>
+    <div class="nav-links">
+      <a href="../index.html">Home</a>
+      <a href="discover.html">Discover</a>
+      <a href="play.html">Play</a>
+      <a href="create.html">Create</a>
+      <a href="connect.html">Connect</a>
+    </div>
+    <a href="leaderboard.html" class="btn btn-primary">Leaderboard</a>
+  </nav>
+
+  <header class="profile-hero">
+    <section class="profile-banner">
+      <div class="profile-top">
+        <div class="profile-avatar">N</div>
+        <div class="profile-details">
+          <h1>Explorer</h1>
+          <p>Your personal NOVARA space</p>
+          <span class="profile-badge">✦ NEW EXPLORER</span>
+        </div>
+      </div>
+
+      <div class="profile-stats">
+        <div class="stat-box">
+          <small>Experience Points</small>
+          <strong id="xp">0 XP</strong>
+        </div>
+        <div class="stat-box">
+          <small>Achievements</small>
+          <strong id="achievements">0</strong>
+        </div>
+        <div class="stat-box">
+          <small>Activities</small>
+          <strong id="activities">0</strong>
+        </div>
+      </div>
+    </section>
+  </header>
+
+  <main class="profile-content">
+    <section class="profile-section">
+      <h2>Your Collection</h2>
+      <div class="profile-grid">
+        <article class="profile-card">
+          <div class="card-icon">🎨</div>
+          <h3>Saved Creations</h3>
+          <p>Your memes, profile ideas, quotes and creative experiments.</p>
+          <button onclick="showMessage('Your saved creations will appear here.')">Explore Collection</button>
+        </article>
+
+        <article class="profile-card">
+          <div class="card-icon">⭐</div>
+          <h3>Achievements</h3>
+          <p>Milestones and rewards you unlock while exploring NOVARA.</p>
+          <button onclick="showMessage('Your achievements will appear here.')">View Achievements</button>
+        </article>
+
+        <article class="profile-card">
+          <div class="card-icon">🧩</div>
+          <h3>Game History</h3>
+          <p>Keep track of your puzzles, challenges and game progress.</p>
+          <button onclick="showMessage('Your game history will appear here.')">View History</button>
+        </article>
+
+        <article class="profile-card">
+          <div class="card-icon">🏆</div>
+          <h3>Your Ranking</h3>
+          <p>Visit the NOVARA leaderboard and explore the top players.</p>
+          <button onclick="location.href='leaderboard.html'">Open Leaderboard</button>
+        </article>
+      </div>
+    </section>
+
+    <section class="profile-section">
+      <h2>Recent Activity</h2>
+      <div class="activity-empty">
+        <strong>✨ Your journey starts here.</strong>
+        Explore NOVARA, play games and create something amazing.
+        Your activity will appear here when account-based tracking is added.
+      </div>
+    </section>
+
+    <p class="profile-note">
+      Preview profile: this page currently uses sample information. Secure accounts,
+      saved progress, achievements and real XP tracking require the upcoming backend.
+    </p>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-brand">
+      <a href="../index.html" class="logo">NOVA<span>RA.</span></a>
+      <p>Discover. Play. Create. Connect.</p>
+    </div>
+    <p>© <span id="year"></span> NOVARA. All rights reserved.</p>
+  </footer>
+
+  <script src="../js/app.js"></script>
+  <script>
+    function showMessage(message) {
+      if (typeof showToast === "function") {
+        showToast(message);
+      } else {
+        alert(message);
+      }
+    }
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
