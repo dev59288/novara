@@ -1,0 +1,334 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#090b18">
+  <title>Connect | NOVARA</title>
+  <link rel="stylesheet" href="../styles.css">
+
+  <style>
+    .connect-hero {
+      padding: 85px 7% 45px;
+      text-align: center;
+    }
+
+    .connect-hero h1 {
+      font: 700 clamp(44px,7vw,76px)/1.1 'Space Grotesk',sans-serif;
+      margin: 18px 0;
+    }
+
+    .connect-hero h1 span {
+      background: linear-gradient(90deg,#a78bfa,#55d6ff);
+      -webkit-background-clip: text;
+      color: transparent;
+    }
+
+    .connect-hero p {
+      color: var(--muted);
+      line-height: 1.8;
+    }
+
+    .connect-grid {
+      display: grid;
+      grid-template-columns: repeat(2,minmax(0,1fr));
+      gap: 20px;
+    }
+
+    .connect-card {
+      padding: 27px;
+      border: 1px solid var(--border);
+      border-radius: 22px;
+      background: linear-gradient(145deg,#191e38,#101326);
+      transition: .3s;
+    }
+
+    .connect-card:hover {
+      transform: translateY(-5px);
+      border-color: var(--purple);
+    }
+
+    .connect-icon {
+      font-size: 42px;
+      margin-bottom: 15px;
+    }
+
+    .connect-card h3 {
+      font: 600 23px 'Space Grotesk',sans-serif;
+      margin-bottom: 10px;
+    }
+
+    .connect-card p {
+      color: var(--muted);
+      line-height: 1.7;
+      font-size: 14px;
+      margin-bottom: 20px;
+    }
+
+    .poll-option {
+      width: 100%;
+      display: block;
+      text-align: left;
+      padding: 14px;
+      border-radius: 11px;
+      border: 1px solid var(--border);
+      background: rgba(255,255,255,.04);
+      margin: 10px 0;
+      transition: .2s;
+    }
+
+    .poll-option:hover:not(:disabled) {
+      background: rgba(139,92,246,.2);
+      border-color: var(--purple);
+    }
+
+    .poll-option:disabled {
+      cursor: default;
+      opacity: .8;
+    }
+
+    .poll-result {
+      height: 7px;
+      background: rgba(255,255,255,.1);
+      border-radius: 20px;
+      margin-top: 8px;
+      overflow: hidden;
+    }
+
+    .poll-result span {
+      display: block;
+      height: 100%;
+      background: linear-gradient(90deg,#7045e9,#55d6ff);
+      border-radius: 20px;
+      transition: width .4s;
+    }
+
+    .challenge-box {
+      background: rgba(139,92,246,.12);
+      padding: 20px;
+      border-radius: 15px;
+      border: 1px solid rgba(139,92,246,.25);
+    }
+
+    .challenge-box strong {
+      display: block;
+      margin-bottom: 10px;
+    }
+
+    .connect-card button.submit-button {
+      background: linear-gradient(110deg,#7045e9,#a15cf6);
+      padding: 12px 18px;
+      border-radius: 10px;
+      font-weight: 700;
+      margin-top: 10px;
+    }
+
+    .community-note {
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.6;
+      margin-top: 12px;
+    }
+
+    @media(max-width:650px) {
+      .connect-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <header class="navbar">
+    <a href="../index.html" class="logo">NOVARA</a>
+
+    <nav class="nav-links">
+      <a href="../index.html">Home</a>
+      <a href="discover.html">Discover</a>
+      <a href="play.html">Play</a>
+      <a href="create.html">Create</a>
+      <a href="connect.html" class="active">Connect</a>
+    </nav>
+
+    <div class="nav-actions">
+      <a href="../index.html" class="btn-primary">Home ↗</a>
+    </div>
+
+    <button class="menu-btn" aria-label="Open navigation" aria-expanded="false">☰</button>
+  </header>
+
+  <main>
+
+    <div class="connect-hero">
+      <div class="eyebrow">THE COMMUNITY UNIVERSE</div>
+      <h1>More than a <span>Game.</span></h1>
+      <p>Share opinions, take on challenges<br>and be part of the NOVARA community.</p>
+    </div>
+
+    <section>
+      <div class="section-heading">
+        <div>
+          <h2>Community activities</h2>
+          <p>Join the conversation and make your choice.</p>
+        </div>
+      </div>
+
+      <div class="connect-grid">
+
+        <article class="connect-card">
+          <div class="connect-icon">📊</div>
+          <h3>Community Poll</h3>
+          <p>Which world would you explore first?</p>
+
+          <div id="pollOptions">
+            <button class="poll-option" data-vote="Discover">🌍 Discover</button>
+            <button class="poll-option" data-vote="Play">🎮 Play</button>
+            <button class="poll-option" data-vote="Create">🎨 Create</button>
+            <button class="poll-option" data-vote="Connect">🤝 Connect</button>
+          </div>
+
+          <p id="pollMessage" aria-live="polite"></p>
+          <p class="community-note">Demo poll: votes are stored only in this browser.</p>
+        </article>
+
+        <article class="connect-card">
+          <div class="connect-icon">⚔️</div>
+          <h3>Daily Challenge</h3>
+          <p>Take a creative challenge and share your idea.</p>
+
+          <div class="challenge-box">
+            <strong>Today's challenge</strong>
+            Design a fictional planet. Give it a name and one special feature.
+          </div>
+
+          <button class="submit-button" id="challengeButton">Accept Challenge →</button>
+          <p id="challengeMessage" aria-live="polite"></p>
+        </article>
+
+        <article class="connect-card">
+          <div class="connect-icon">💡</div>
+          <h3>Share an Idea</h3>
+          <p>Suggest something that should become part of NOVARA.</p>
+
+          <textarea id="ideaInput" maxlength="300"
+            placeholder="Write your idea..."
+            style="width:100%;min-height:110px;padding:14px;border-radius:12px;background:#0c1020;border:1px solid var(--border);color:white;resize:vertical"></textarea>
+
+          <button class="submit-button" id="ideaButton">Save My Idea →</button>
+          <p id="ideaMessage" aria-live="polite"></p>
+          <p class="community-note">Your idea is saved locally on this device, not publicly submitted.</p>
+        </article>
+
+        <article class="connect-card">
+          <div class="connect-icon">🌟</div>
+          <h3>Community Spirit</h3>
+          <p>Great communities grow through creativity, respect and curiosity.</p>
+
+          <div class="challenge-box">
+            <strong>Our community principles</strong>
+            Respect different opinions.<br><br>
+            Share original ideas.<br><br>
+            Keep challenges fun and friendly.
+          </div>
+        </article>
+
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <div class="footer-top">
+      <div>
+        <a href="../index.html" class="logo">NOVARA</a>
+        <p class="footer-description">Discover. Play. Create. Connect.</p>
+      </div>
+
+      <div class="footer-links">
+        <a href="../index.html">Home</a>
+        <a href="discover.html">Discover</a>
+        <a href="play.html">Play</a>
+        <a href="create.html">Create</a>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <span>© <span data-year></span> NOVARA</span>
+      <span>Better together.</span>
+    </div>
+  </footer>
+
+  <script src="../js/app.js" defer></script>
+
+  <script>
+    const pollOptions = document.querySelectorAll("[data-vote]");
+    const pollMessage = document.getElementById("pollMessage");
+    const storageKey = "novara-demo-poll-v1";
+
+    function renderPoll() {
+      const saved = localStorage.getItem(storageKey);
+
+      if (!saved) return;
+
+      pollOptions.forEach(button => {
+        button.disabled = true;
+
+        if (button.dataset.vote === saved) {
+          button.textContent += " ✓ Your choice";
+        }
+      });
+
+      pollMessage.textContent = "Your demo vote: " + saved;
+    }
+
+    pollOptions.forEach(button => {
+      button.addEventListener("click", () => {
+        if (localStorage.getItem(storageKey)) return;
+
+        const choice = button.dataset.vote;
+        localStorage.setItem(storageKey, choice);
+        renderPoll();
+      });
+    });
+
+    renderPoll();
+
+    document.getElementById("challengeButton").addEventListener("click", () => {
+      localStorage.setItem("novara-challenge-accepted", "true");
+      document.getElementById("challengeMessage").textContent =
+        "Challenge accepted! Start creating your fictional planet.";
+    });
+
+    document.getElementById("ideaButton").addEventListener("click", () => {
+      const input = document.getElementById("ideaInput");
+      const message = document.getElementById("ideaMessage");
+      const idea = input.value.trim();
+
+      if (!idea) {
+        message.textContent = "Write an idea first.";
+        return;
+      }
+
+      try {
+        const ideas = JSON.parse(
+          localStorage.getItem("novara-local-ideas") || "[]"
+        );
+
+        ideas.push({
+          text: idea,
+          createdAt: new Date().toISOString()
+        });
+
+        localStorage.setItem("novara-local-ideas", JSON.stringify(ideas));
+        input.value = "";
+        message.textContent = "Your idea has been saved on this device!";
+      } catch {
+        message.textContent = "Could not save your idea in this browser.";
+      }
+    });
+  </script>
+
+</body>
+</html>
