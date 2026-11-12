@@ -1,0 +1,265 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#090B18">
+
+  <title>NOVARA — Your World. Your Rules.</title>
+  <meta name="description" content="Discover, play, create and connect in the NOVARA digital universe.">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="/styles.css">
+
+  <script src="/js/app.js" defer></script>
+</head>
+
+<body>
+
+  <div class="background-effects" aria-hidden="true">
+    <div class="orb orb-one"></div>
+    <div class="orb orb-two"></div>
+    <div class="grid-overlay"></div>
+  </div>
+
+  <header class="navbar">
+    <a href="#" class="brand">
+      NOV<span>A</span>RA
+      <i class="brand-dot"></i>
+    </a>
+
+    <nav class="nav-links" id="navLinks">
+      <a href="#discover">Discover</a>
+      <a href="#play">Play</a>
+      <a href="#create">Create</a>
+      <a href="#connect">Connect</a>
+    </nav>
+
+    <div class="nav-actions">
+      <button class="icon-button" id="searchButton" aria-label="Search">
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <circle cx="11" cy="11" r="7"></circle>
+          <path d="m16 16 5 5"></path>
+        </svg>
+      </button>
+
+      <a href="#profile" class="profile-button">My Space ↗</a>
+
+      <button class="menu-button" id="menuButton" aria-label="Open menu">
+        <span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- HERO -->
+    <section class="hero section-shell">
+      <div class="hero-copy reveal">
+        <div class="eyebrow">
+          <span class="live-dot"></span>
+          A NEW DIGITAL UNIVERSE
+        </div>
+
+        <h1>
+          Your World.
+          <span class="gradient-text">Your Rules.</span>
+        </h1>
+
+        <p class="hero-description">
+          Discover unexpected things, challenge your mind,
+          create something extraordinary and connect with the world.
+        </p>
+
+        <div class="hero-actions">
+          <a href="#discover" class="primary-button">
+            Explore NOVARA <span>↗</span>
+          </a>
+          <a href="#play" class="secondary-button">
+            Discover experiences
+          </a>
+        </div>
+
+        <div class="hero-caption">
+          <span class="caption-line"></span>
+          DISCOVER. PLAY. CREATE. CONNECT.
+        </div>
+      </div>
+
+      <div class="hero-art reveal" aria-label="Abstract NOVARA universe graphic">
+        <div class="orbit orbit-large"></div>
+        <div class="orbit orbit-small"></div>
+
+        <div class="planet planet-main"></div>
+        <div class="planet planet-small"></div>
+        <div class="planet planet-tiny"></div>
+
+        <div class="hero-glass-card">
+          <span class="card-symbol">✦</span>
+          <span class="glass-label">EXPLORE THE UNKNOWN</span>
+          <strong>Something<br>new awaits.</strong>
+          <span class="glass-arrow">↗</span>
+        </div>
+
+        <div class="floating-label label-top">✧ YOUR UNIVERSE</div>
+        <div class="floating-label label-bottom">01 / INFINITE POSSIBILITIES</div>
+      </div>
+    </section>
+
+    <!-- FEATURED EXPERIENCE -->
+    <section class="featured-section section-shell reveal">
+      <div class="section-heading">
+        <div>
+          <span class="section-kicker">TODAY'S SPOTLIGHT</span>
+          <h2>Featured <span class="gradient-text">experience.</span></h2>
+        </div>
+        <span class="live-label"><i></i> FEATURED</span>
+      </div>
+
+      <article class="featured-card">
+        <div class="featured-art">
+          <div class="featured-ring"></div>
+          <div class="featured-star">✦</div>
+          <div class="featured-number">01</div>
+        </div>
+
+        <div class="featured-content">
+          <span class="category-label">DAILY CHALLENGE</span>
+          <h3>Ready to test your mind?</h3>
+          <p>
+            A fresh challenge, a new experience and a chance
+            to beat your own best score.
+          </p>
+          <a href="#play" class="text-link">Take the challenge ↗</a>
+        </div>
+      </article>
+    </section>
+
+    <!-- DISCOVER -->
+    <section class="universe-section section-shell" id="discover">
+      <div class="section-heading reveal">
+        <div>
+          <span class="section-kicker">FIND YOUR NEXT OBSESSION</span>
+          <h2>Explore the <span class="gradient-text">universe.</span></h2>
+        </div>
+        <p>Four worlds. Endless possibilities.</p>
+      </div>
+
+      <div class="world-grid">
+
+        <a href="#discover" class="world-card world-discover reveal">
+          <div class="world-icon">✧</div>
+          <span class="world-number">01 / DISCOVER</span>
+          <h3>Discover</h3>
+          <p>Quizzes, personality tests and surprising discoveries.</p>
+          <span class="world-arrow">↗</span>
+          <div class="world-decoration decoration-one"></div>
+        </a>
+
+        <a href="#play" class="world-card world-play reveal" id="play">
+          <div class="world-icon">◈</div>
+          <span class="world-number">02 / PLAY</span>
+          <h3>Play</h3>
+          <p>Puzzles, brain games and mysterious challenges.</p>
+          <span class="world-arrow">↗</span>
+          <div class="world-decoration decoration-two"></div>
+        </a>
+
+        <a href="#create" class="world-card world-create reveal" id="create">
+          <div class="world-icon">✳</div>
+          <span class="world-number">03 / CREATE</span>
+          <h3>Create</h3>
+          <p>Make memes, profile cards and creative designs.</p>
+          <span class="world-arrow">↗</span>
+          <div class="world-decoration decoration-three"></div>
+        </a>
+
+        <a href="#connect" class="world-card world-connect reveal" id="connect">
+          <div class="world-icon">⌘</div>
+          <span class="world-number">04 / CONNECT</span>
+          <h3>Connect</h3>
+          <p>Vote, battle, share opinions and join challenges.</p>
+          <span class="world-arrow">↗</span>
+          <div class="world-decoration decoration-four"></div>
+        </a>
+
+      </div>
+    </section>
+
+    <!-- TRENDING -->
+    <section class="trending-section section-shell reveal">
+      <div class="section-heading">
+        <div>
+          <span class="section-kicker">WHAT'S GETTING ATTENTION</span>
+          <h2>Trending <span class="gradient-text">battles.</span></h2>
+        </div>
+        <a href="#connect" class="text-link">Explore all ↗</a>
+      </div>
+
+      <div class="battle-grid">
+        <article class="battle-card">
+          <span class="battle-tag">VS BATTLE</span>
+          <div class="battle-visual">
+            <div class="battle-side">🦇</div>
+            <span>VS</span>
+            <div class="battle-side">🦾</div>
+          </div>
+          <h3>Batman vs Iron Man</h3>
+          <p>Who wins your vote?</p>
+          <a href="#connect" class="text-link">Cast your vote ↗</a>
+        </article>
+
+        <article class="battle-card">
+          <span class="battle-tag">VS BATTLE</span>
+          <div class="battle-visual">
+            <div class="battle-side">📱</div>
+            <span>VS</span>
+            <div class="battle-side">✨</div>
+          </div>
+          <h3>iPhone vs Samsung</h3>
+          <p>Pick your favourite.</p>
+          <a href="#connect" class="text-link">Cast your vote ↗</a>
+        </article>
+      </div>
+    </section>
+
+    <!-- COMMUNITY -->
+    <section class="community-section section-shell reveal" id="profile">
+      <div class="community-card">
+        <div class="community-decoration">✧</div>
+        <span class="section-kicker">YOUR SPACE. YOUR IDENTITY.</span>
+        <h2>Be part of<br><span class="gradient-text">something bigger.</span></h2>
+        <p>
+          Explore experiences, save your creations and
+          discover what makes NOVARA special.
+        </p>
+        <a href="#discover" class="primary-button">Start exploring ↗</a>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="footer section-shell">
+    <a href="#" class="brand">NOV<span>A</span>RA<i class="brand-dot"></i></a>
+    <p>Discover. Play. Create. Connect.</p>
+    <span>© <span id="currentYear">2026</span> NOVARA. All rights reserved.</span>
+  </footer>
+
+  <div class="search-overlay" id="searchOverlay" aria-hidden="true">
+    <div class="search-panel">
+      <button class="search-close" id="searchClose" aria-label="Close search">✕</button>
+      <span class="section-kicker">EXPLORE NOVARA</span>
+      <h2>What are you looking for?</h2>
+      <input type="search" id="siteSearch" placeholder="Search experiences..." autocomplete="off">
+      <p id="searchMessage">Discover something new.</p>
+    </div>
+  </div>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+</body>
+</html>
