@@ -1,0 +1,297 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#090b18">
+  <title>Play | NOVARA</title>
+  <link rel="stylesheet" href="../styles.css">
+
+  <style>
+    .play-hero {
+      padding: 85px 7% 45px;
+      text-align: center;
+    }
+
+    .play-hero h1 {
+      font: 700 clamp(44px,7vw,76px)/1.1 'Space Grotesk',sans-serif;
+      margin: 18px 0;
+    }
+
+    .play-hero h1 span {
+      background: linear-gradient(90deg,#a78bfa,#55d6ff);
+      -webkit-background-clip: text;
+      color: transparent;
+    }
+
+    .play-hero p {
+      color: var(--muted);
+      line-height: 1.8;
+    }
+
+    .game-grid {
+      display: grid;
+      grid-template-columns: repeat(3,minmax(0,1fr));
+      gap: 20px;
+    }
+
+    .game-card {
+      position: relative;
+      overflow: hidden;
+      background: linear-gradient(145deg,#191e38,#101326);
+      border: 1px solid var(--border);
+      border-radius: 22px;
+      padding: 27px;
+      transition: .3s;
+    }
+
+    .game-card:hover {
+      transform: translateY(-7px);
+      border-color: var(--purple);
+      box-shadow: 0 15px 35px rgba(0,0,0,.25);
+    }
+
+    .game-icon {
+      font-size: 48px;
+      margin-bottom: 20px;
+    }
+
+    .game-card h3 {
+      font: 600 22px 'Space Grotesk',sans-serif;
+      margin-bottom: 10px;
+    }
+
+    .game-card p {
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.7;
+      min-height: 70px;
+      margin-bottom: 20px;
+    }
+
+    .game-card button {
+      background: linear-gradient(110deg,#7045e9,#a15cf6);
+      padding: 12px 18px;
+      border-radius: 10px;
+      font-weight: 700;
+    }
+
+    .game-card button:hover {
+      box-shadow: 0 0 20px rgba(139,92,246,.4);
+    }
+
+    .game-modal {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 120;
+      background: rgba(5,7,17,.9);
+      backdrop-filter: blur(12px);
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .game-modal.active {
+      display: flex;
+    }
+
+    .modal-content {
+      width: min(500px,100%);
+      background: #171c34;
+      border: 1px solid var(--border);
+      border-radius: 22px;
+      padding: 30px;
+      text-align: center;
+    }
+
+    .modal-content h2 {
+      font: 700 27px 'Space Grotesk',sans-serif;
+      margin-bottom: 12px;
+    }
+
+    .modal-content p {
+      color: var(--muted);
+      line-height: 1.7;
+      margin-bottom: 20px;
+    }
+
+    .modal-content button {
+      background: var(--purple);
+      padding: 12px 20px;
+      border-radius: 10px;
+      font-weight: 700;
+    }
+
+    .modal-close {
+      float: right;
+      background: transparent !important;
+      font-size: 22px;
+      padding: 0 !important;
+    }
+
+    @media(max-width:750px) {
+      .game-grid {
+        grid-template-columns: repeat(2,minmax(0,1fr));
+      }
+    }
+
+    @media(max-width:520px) {
+      .game-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <header class="navbar">
+    <a href="../index.html" class="logo">NOVARA</a>
+
+    <nav class="nav-links">
+      <a href="../index.html">Home</a>
+      <a href="discover.html">Discover</a>
+      <a href="play.html" class="active">Play</a>
+      <a href="create.html">Create</a>
+      <a href="connect.html">Connect</a>
+    </nav>
+
+    <div class="nav-actions">
+      <a href="../index.html" class="btn-primary">Home ↗</a>
+    </div>
+
+    <button class="menu-btn" aria-label="Open navigation" aria-expanded="false">☰</button>
+  </header>
+
+  <main>
+
+    <div class="play-hero">
+      <div class="eyebrow">ENTER THE GAME ZONE</div>
+      <h1>Ready. Set. <span>Play.</span></h1>
+      <p>Challenge your mind, solve puzzles and explore<br>new ways to have fun.</p>
+    </div>
+
+    <section>
+      <div class="section-heading">
+        <div>
+          <h2>Choose your game</h2>
+          <p>Your next challenge starts here.</p>
+        </div>
+      </div>
+
+      <div class="game-grid">
+
+        <article class="game-card">
+          <div class="game-icon">🧩</div>
+          <h3>Brain Puzzles</h3>
+          <p>Exercise your thinking with clever puzzles and tricky questions.</p>
+          <button data-game="Brain Puzzles">Play Now →</button>
+        </article>
+
+        <article class="game-card">
+          <div class="game-icon">🔢</div>
+          <h3>Number Challenge</h3>
+          <p>Test your number skills with quick mathematical challenges.</p>
+          <button data-game="Number Challenge">Play Now →</button>
+        </article>
+
+        <article class="game-card">
+          <div class="game-icon">🕵️</div>
+          <h3>Mystery Room</h3>
+          <p>Follow clues, think carefully and solve a fictional mystery.</p>
+          <button data-game="Mystery Room">Play Now →</button>
+        </article>
+
+        <article class="game-card">
+          <div class="game-icon">⚡</div>
+          <h3>Quick Quiz</h3>
+          <p>Answer fun questions and see how much you know.</p>
+          <button data-game="Quick Quiz">Play Now →</button>
+        </article>
+
+        <article class="game-card">
+          <div class="game-icon">🎯</div>
+          <h3>Memory Match</h3>
+          <p>Challenge your memory with a matching game.</p>
+          <button data-game="Memory Match">Play Now →</button>
+        </article>
+
+        <article class="game-card">
+          <div class="game-icon">🌌</div>
+          <h3>Word Quest</h3>
+          <p>Explore words, solve clues and discover hidden answers.</p>
+          <button data-game="Word Quest">Play Now →</button>
+        </article>
+
+      </div>
+    </section>
+
+  </main>
+
+  <div class="game-modal" id="gameModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <div class="modal-content">
+      <button class="modal-close" id="closeModal" aria-label="Close">✕</button>
+      <div style="font-size:45px;margin:20px 0;">🎮</div>
+      <h2 id="modalTitle">Game</h2>
+      <p id="modalDescription">This game is being prepared.</p>
+      <button id="modalAction">Got it</button>
+    </div>
+  </div>
+
+  <footer>
+    <div class="footer-top">
+      <div>
+        <a href="../index.html" class="logo">NOVARA</a>
+        <p class="footer-description">Discover. Play. Create. Connect.</p>
+      </div>
+
+      <div class="footer-links">
+        <a href="../index.html">Home</a>
+        <a href="discover.html">Discover</a>
+        <a href="create.html">Create</a>
+        <a href="connect.html">Connect</a>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <span>© <span data-year></span> NOVARA</span>
+      <span>Play beyond limits.</span>
+    </div>
+  </footer>
+
+  <script src="../js/app.js" defer></script>
+
+  <script>
+    const modal = document.getElementById("gameModal");
+    const modalTitle = document.getElementById("modalTitle");
+    const modalDescription = document.getElementById("modalDescription");
+
+    document.querySelectorAll("[data-game]").forEach(button => {
+      button.addEventListener("click", () => {
+        modalTitle.textContent = button.dataset.game;
+        modalDescription.textContent =
+          "This experience is planned for NOVARA. Its playable version will be added in the next development stage.";
+        modal.classList.add("active");
+      });
+    });
+
+    function closeGameModal() {
+      modal.classList.remove("active");
+    }
+
+    document.getElementById("closeModal").addEventListener("click", closeGameModal);
+    document.getElementById("modalAction").addEventListener("click", closeGameModal);
+
+    modal.addEventListener("click", event => {
+      if (event.target === modal) closeGameModal();
+    });
+
+    document.addEventListener("keydown", event => {
+      if (event.key === "Escape") closeGameModal();
+    });
+  </script>
+
+</body>
+</html>
