@@ -5,21 +5,169 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="theme-color" content="#090B18">
-
   <title>NOVARA — Your World. Your Rules.</title>
   <meta name="description" content="Discover, play, create and connect in the NOVARA digital universe.">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
-
   <link rel="stylesheet" href="/styles.css">
-
   <script src="/js/app.js" defer></script>
+
+  <style>
+    html { scroll-behavior:smooth; }
+    body { overflow-x:hidden; }
+
+    .navbar { z-index:100; }
+    .nav-links a, .footer-links a {
+      text-decoration:none;
+    }
+    .nav-links a:hover, .footer-links a:hover {
+      color:#b99aff;
+    }
+    .nav-extra {
+      display:flex;
+      align-items:center;
+      gap:15px;
+    }
+    .hero-art {
+      perspective:900px;
+      animation:heroFloat 7s ease-in-out infinite;
+    }
+    .planet-main {
+      animation:planetPulse 5s ease-in-out infinite alternate;
+      box-shadow:0 0 65px #8b5cf688, inset -25px -20px 50px #080b18;
+    }
+    .orbit-large { animation:orbitSpin 25s linear infinite; }
+    .orbit-small { animation:orbitSpin 17s linear infinite reverse; }
+    .hero-glass-card {
+      animation:cardFloat 5s ease-in-out infinite;
+      backdrop-filter:blur(18px);
+    }
+    .world-card, .battle-card, .featured-card {
+      transition:transform .35s ease,border-color .35s ease,box-shadow .35s ease;
+    }
+    .world-card:hover, .battle-card:hover {
+      transform:translateY(-8px);
+      border-color:#a78bfa88;
+      box-shadow:0 18px 50px #0005;
+    }
+    .featured-art {
+      position:relative;
+      overflow:hidden;
+    }
+    .featured-ring {
+      animation:orbitSpin 16s linear infinite;
+    }
+    .featured-star {
+      animation:starGlow 2.5s ease-in-out infinite alternate;
+    }
+    .community-decoration {
+      animation:starGlow 3s ease-in-out infinite alternate;
+    }
+    .footer-links {
+      display:flex;
+      flex-wrap:wrap;
+      justify-content:center;
+      gap:18px;
+      margin:18px 0;
+      font-size:13px;
+    }
+    .footer-links a { color:#a5a8bb; }
+    .footer-bottom {
+      display:flex;
+      flex-wrap:wrap;
+      justify-content:space-between;
+      align-items:center;
+      gap:15px;
+    }
+    .quick-links {
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      margin-top:20px;
+    }
+    .quick-links a {
+      color:#d8ccff;
+      border:1px solid #ffffff22;
+      padding:9px 14px;
+      border-radius:30px;
+      font-size:12px;
+      text-decoration:none;
+      background:#ffffff08;
+    }
+    .quick-links a:hover { background:#8b5cf633; }
+    .search-result {
+      display:block;
+      padding:12px;
+      margin-top:8px;
+      border:1px solid #ffffff18;
+      border-radius:10px;
+      color:white;
+      text-decoration:none;
+      background:#ffffff08;
+    }
+    .search-result:hover { background:#8b5cf633; }
+    .search-results { max-height:240px; overflow:auto; }
+    .menu-button { cursor:pointer; }
+    .menu-button span { display:block; }
+    @keyframes heroFloat {
+      0%,100% { transform:translateY(0); }
+      50% { transform:translateY(-12px); }
+    }
+    @keyframes cardFloat {
+      0%,100% { transform:translateY(0) rotateY(-5deg); }
+      50% { transform:translateY(-9px) rotateY(5deg); }
+    }
+    @keyframes planetPulse {
+      from { filter:hue-rotate(0deg) brightness(.9); }
+      to { filter:hue-rotate(35deg) brightness(1.2); }
+    }
+    @keyframes orbitSpin {
+      to { transform:rotate(360deg); }
+    }
+    @keyframes starGlow {
+      from { opacity:.55; transform:scale(.9); }
+      to { opacity:1; transform:scale(1.12); }
+    }
+    @media(max-width:850px) {
+      .nav-extra { gap:8px; }
+      .nav-links {
+        position:absolute;
+        top:75px;
+        left:15px;
+        right:15px;
+        padding:20px;
+        display:none;
+        flex-direction:column;
+        align-items:stretch;
+        gap:17px;
+        background:#111329f5;
+        border:1px solid #ffffff20;
+        border-radius:17px;
+        backdrop-filter:blur(20px);
+      }
+      .nav-links.open { display:flex; }
+      .nav-links a { padding:7px; }
+      .profile-button { display:none; }
+    }
+    @media(max-width:600px) {
+      .footer-bottom { justify-content:center; text-align:center; }
+      .footer-links { gap:12px; }
+      .hero-art { min-height:300px; }
+    }
+    @media(prefers-reduced-motion:reduce) {
+      *,*::before,*::after {
+        animation-duration:.01ms !important;
+        animation-iteration-count:1 !important;
+        scroll-behavior:auto !important;
+        transition-duration:.01ms !important;
+      }
+    }
+  </style>
 </head>
 
 <body>
-
   <div class="background-effects" aria-hidden="true">
     <div class="orb orb-one"></div>
     <div class="orb orb-two"></div>
@@ -27,28 +175,24 @@
   </div>
 
   <header class="navbar">
-    <a href="#" class="brand">
-      NOV<span>A</span>RA
-      <i class="brand-dot"></i>
-    </a>
+    <a href="/" class="brand">NOV<span>A</span>RA<i class="brand-dot"></i></a>
 
     <nav class="nav-links" id="navLinks">
-      <a href="#discover">Discover</a>
-      <a href="#play">Play</a>
-      <a href="#create">Create</a>
-      <a href="#connect">Connect</a>
+      <a href="/pages/discover.html">Discover</a>
+      <a href="/pages/play.html">Play</a>
+      <a href="/pages/create.html">Create</a>
+      <a href="/pages/connect.html">Connect</a>
+      <a href="/pages/leaderboard.html">Leaderboard</a>
     </nav>
 
-    <div class="nav-actions">
+    <div class="nav-actions nav-extra">
       <button class="icon-button" id="searchButton" aria-label="Search">
         <svg viewBox="0 0 24 24" aria-hidden="true">
           <circle cx="11" cy="11" r="7"></circle>
           <path d="m16 16 5 5"></path>
         </svg>
       </button>
-
-      <a href="#profile" class="profile-button">My Space ↗</a>
-
+      <a href="/pages/profile.html" class="profile-button">My Space ↗</a>
       <button class="menu-button" id="menuButton" aria-label="Open menu">
         <span></span><span></span>
       </button>
@@ -56,61 +200,48 @@
   </header>
 
   <main>
-
-    <!-- HERO -->
     <section class="hero section-shell">
       <div class="hero-copy reveal">
         <div class="eyebrow">
           <span class="live-dot"></span>
           A NEW DIGITAL UNIVERSE
         </div>
-
-        <h1>
-          Your World.
-          <span class="gradient-text">Your Rules.</span>
-        </h1>
-
+        <h1>Your World.<br><span class="gradient-text">Your Rules.</span></h1>
         <p class="hero-description">
           Discover unexpected things, challenge your mind,
           create something extraordinary and connect with the world.
         </p>
-
         <div class="hero-actions">
-          <a href="#discover" class="primary-button">
-            Explore NOVARA <span>↗</span>
-          </a>
-          <a href="#play" class="secondary-button">
-            Discover experiences
-          </a>
+          <a href="/pages/discover.html" class="primary-button">Explore NOVARA <span>↗</span></a>
+          <a href="/pages/play.html" class="secondary-button">Start playing</a>
         </div>
-
         <div class="hero-caption">
           <span class="caption-line"></span>
           DISCOVER. PLAY. CREATE. CONNECT.
+        </div>
+        <div class="quick-links">
+          <a href="/pages/leaderboard.html">🏆 Leaderboard</a>
+          <a href="/pages/profile.html">✦ My Space</a>
         </div>
       </div>
 
       <div class="hero-art reveal" aria-label="Abstract NOVARA universe graphic">
         <div class="orbit orbit-large"></div>
         <div class="orbit orbit-small"></div>
-
         <div class="planet planet-main"></div>
         <div class="planet planet-small"></div>
         <div class="planet planet-tiny"></div>
-
         <div class="hero-glass-card">
           <span class="card-symbol">✦</span>
           <span class="glass-label">EXPLORE THE UNKNOWN</span>
           <strong>Something<br>new awaits.</strong>
           <span class="glass-arrow">↗</span>
         </div>
-
         <div class="floating-label label-top">✧ YOUR UNIVERSE</div>
         <div class="floating-label label-bottom">01 / INFINITE POSSIBILITIES</div>
       </div>
     </section>
 
-    <!-- FEATURED EXPERIENCE -->
     <section class="featured-section section-shell reveal">
       <div class="section-heading">
         <div>
@@ -119,27 +250,21 @@
         </div>
         <span class="live-label"><i></i> FEATURED</span>
       </div>
-
       <article class="featured-card">
         <div class="featured-art">
           <div class="featured-ring"></div>
           <div class="featured-star">✦</div>
           <div class="featured-number">01</div>
         </div>
-
         <div class="featured-content">
           <span class="category-label">DAILY CHALLENGE</span>
           <h3>Ready to test your mind?</h3>
-          <p>
-            A fresh challenge, a new experience and a chance
-            to beat your own best score.
-          </p>
-          <a href="#play" class="text-link">Take the challenge ↗</a>
+          <p>A fresh challenge, a new experience and a chance to beat your own best score.</p>
+          <a href="/pages/play.html" class="text-link">Explore games ↗</a>
         </div>
       </article>
     </section>
 
-    <!-- DISCOVER -->
     <section class="universe-section section-shell" id="discover">
       <div class="section-heading reveal">
         <div>
@@ -150,8 +275,7 @@
       </div>
 
       <div class="world-grid">
-
-        <a href="#discover" class="world-card world-discover reveal">
+        <a href="/pages/discover.html" class="world-card world-discover reveal">
           <div class="world-icon">✧</div>
           <span class="world-number">01 / DISCOVER</span>
           <h3>Discover</h3>
@@ -160,7 +284,7 @@
           <div class="world-decoration decoration-one"></div>
         </a>
 
-        <a href="#play" class="world-card world-play reveal" id="play">
+        <a href="/pages/play.html" class="world-card world-play reveal">
           <div class="world-icon">◈</div>
           <span class="world-number">02 / PLAY</span>
           <h3>Play</h3>
@@ -169,7 +293,7 @@
           <div class="world-decoration decoration-two"></div>
         </a>
 
-        <a href="#create" class="world-card world-create reveal" id="create">
+        <a href="/pages/create.html" class="world-card world-create reveal">
           <div class="world-icon">✳</div>
           <span class="world-number">03 / CREATE</span>
           <h3>Create</h3>
@@ -178,7 +302,7 @@
           <div class="world-decoration decoration-three"></div>
         </a>
 
-        <a href="#connect" class="world-card world-connect reveal" id="connect">
+        <a href="/pages/connect.html" class="world-card world-connect reveal">
           <div class="world-icon">⌘</div>
           <span class="world-number">04 / CONNECT</span>
           <h3>Connect</h3>
@@ -186,67 +310,66 @@
           <span class="world-arrow">↗</span>
           <div class="world-decoration decoration-four"></div>
         </a>
-
       </div>
     </section>
 
-    <!-- TRENDING -->
     <section class="trending-section section-shell reveal">
       <div class="section-heading">
         <div>
           <span class="section-kicker">WHAT'S GETTING ATTENTION</span>
           <h2>Trending <span class="gradient-text">battles.</span></h2>
         </div>
-        <a href="#connect" class="text-link">Explore all ↗</a>
+        <a href="/pages/connect.html" class="text-link">Explore all ↗</a>
       </div>
 
       <div class="battle-grid">
         <article class="battle-card">
           <span class="battle-tag">VS BATTLE</span>
           <div class="battle-visual">
-            <div class="battle-side">🦇</div>
-            <span>VS</span>
-            <div class="battle-side">🦾</div>
+            <div class="battle-side">🦇</div><span>VS</span><div class="battle-side">🦾</div>
           </div>
           <h3>Batman vs Iron Man</h3>
           <p>Who wins your vote?</p>
-          <a href="#connect" class="text-link">Cast your vote ↗</a>
+          <a href="/pages/connect.html" class="text-link">Cast your vote ↗</a>
         </article>
 
         <article class="battle-card">
           <span class="battle-tag">VS BATTLE</span>
           <div class="battle-visual">
-            <div class="battle-side">📱</div>
-            <span>VS</span>
-            <div class="battle-side">✨</div>
+            <div class="battle-side">📱</div><span>VS</span><div class="battle-side">✨</div>
           </div>
           <h3>iPhone vs Samsung</h3>
           <p>Pick your favourite.</p>
-          <a href="#connect" class="text-link">Cast your vote ↗</a>
+          <a href="/pages/connect.html" class="text-link">Cast your vote ↗</a>
         </article>
       </div>
     </section>
 
-    <!-- COMMUNITY -->
-    <section class="community-section section-shell reveal" id="profile">
+    <section class="community-section section-shell reveal">
       <div class="community-card">
         <div class="community-decoration">✧</div>
         <span class="section-kicker">YOUR SPACE. YOUR IDENTITY.</span>
         <h2>Be part of<br><span class="gradient-text">something bigger.</span></h2>
-        <p>
-          Explore experiences, save your creations and
-          discover what makes NOVARA special.
-        </p>
-        <a href="#discover" class="primary-button">Start exploring ↗</a>
+        <p>Explore experiences, save your creations and discover what makes NOVARA special.</p>
+        <a href="/pages/profile.html" class="primary-button">Open My Space ↗</a>
       </div>
     </section>
-
   </main>
 
   <footer class="footer section-shell">
-    <a href="#" class="brand">NOV<span>A</span>RA<i class="brand-dot"></i></a>
-    <p>Discover. Play. Create. Connect.</p>
-    <span>© <span id="currentYear">2026</span> NOVARA. All rights reserved.</span>
+    <div class="footer-bottom">
+      <a href="/" class="brand">NOV<span>A</span>RA<i class="brand-dot"></i></a>
+      <p>Discover. Play. Create. Connect.</p>
+      <span>© <span id="currentYear">2026</span> NOVARA. All rights reserved.</span>
+    </div>
+    <div class="footer-links">
+      <a href="/pages/discover.html">Discover</a>
+      <a href="/pages/play.html">Play</a>
+      <a href="/pages/create.html">Create</a>
+      <a href="/pages/connect.html">Connect</a>
+      <a href="/pages/leaderboard.html">Leaderboard</a>
+      <a href="/pages/profile.html">My Space</a>
+    </div>
   </footer>
 
   <div class="search-overlay" id="searchOverlay" aria-hidden="true">
@@ -255,11 +378,78 @@
       <span class="section-kicker">EXPLORE NOVARA</span>
       <h2>What are you looking for?</h2>
       <input type="search" id="siteSearch" placeholder="Search experiences..." autocomplete="off">
+      <div class="search-results" id="searchResults"></div>
       <p id="searchMessage">Discover something new.</p>
     </div>
   </div>
 
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
+  <script>
+    document.getElementById("currentYear").textContent = new Date().getFullYear();
+
+    // Mobile navigation
+    const menuButton = document.getElementById("menuButton");
+    const navLinks = document.getElementById("navLinks");
+
+    menuButton.addEventListener("click", () => {
+      const opened = navLinks.classList.toggle("open");
+      menuButton.setAttribute("aria-expanded", String(opened));
+    });
+
+    navLinks.querySelectorAll("a").forEach(link => {
+      link.addEventListener("click", () => {
+        navLinks.classList.remove("open");
+        menuButton.setAttribute("aria-expanded", "false");
+      });
+    });
+
+    // Search experiences and pages
+    const pages = [
+      {name:"Discover",description:"Quizzes and personality tests",url:"/pages/discover.html"},
+      {name:"Play",description:"Games and brain puzzles",url:"/pages/play.html"},
+      {name:"Create",description:"Creative tools and generators",url:"/pages/create.html"},
+      {name:"Connect",description:"Polls and community challenges",url:"/pages/connect.html"},
+      {name:"Leaderboard",description:"Explore top player rankings",url:"/pages/leaderboard.html"},
+      {name:"My Space",description:"Your personal profile",url:"/pages/profile.html"}
+    ];
+
+    const searchInput = document.getElementById("siteSearch");
+    const searchResults = document.getElementById("searchResults");
+    const searchMessage = document.getElementById("searchMessage");
+
+    searchInput.addEventListener("input", () => {
+      const query = searchInput.value.trim().toLowerCase();
+      searchResults.innerHTML = "";
+
+      if (!query) {
+        searchMessage.textContent = "Discover something new.";
+        return;
+      }
+
+      const matches = pages.filter(page =>
+        (page.name + " " + page.description).toLowerCase().includes(query)
+      );
+
+      searchMessage.textContent = matches.length
+        ? "Select an experience:"
+        : "No matching experience found.";
+
+      matches.forEach(page => {
+        const link = document.createElement("a");
+        link.className = "search-result";
+        link.href = page.url;
+
+        const title = document.createElement("strong");
+        title.textContent = page.name;
+
+        const description = document.createElement("small");
+        description.textContent = " — " + page.description;
+
+        link.append(title, description);
+        searchResults.appendChild(link);
+      });
+    });
+  </script>
 </body>
 </html>
