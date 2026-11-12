@@ -1,0 +1,406 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#090b18">
+  <title>Create | NOVARA</title>
+  <link rel="stylesheet" href="../styles.css">
+
+  <style>
+    .create-hero {
+      padding: 85px 7% 45px;
+      text-align: center;
+    }
+
+    .create-hero h1 {
+      font: 700 clamp(44px,7vw,76px)/1.1 'Space Grotesk',sans-serif;
+      margin: 18px 0;
+    }
+
+    .create-hero h1 span {
+      background: linear-gradient(90deg,#a78bfa,#55d6ff);
+      -webkit-background-clip: text;
+      color: transparent;
+    }
+
+    .create-hero p {
+      color: var(--muted);
+      line-height: 1.8;
+    }
+
+    .create-grid {
+      display: grid;
+      grid-template-columns: repeat(3,minmax(0,1fr));
+      gap: 20px;
+    }
+
+    .create-card {
+      background: linear-gradient(145deg,#191e38,#101326);
+      border: 1px solid var(--border);
+      border-radius: 22px;
+      padding: 27px;
+      transition: .3s;
+    }
+
+    .create-card:hover {
+      transform: translateY(-7px);
+      border-color: var(--purple);
+    }
+
+    .create-card .icon {
+      font-size: 48px;
+      margin-bottom: 20px;
+    }
+
+    .create-card h3 {
+      font: 600 22px 'Space Grotesk',sans-serif;
+      margin-bottom: 10px;
+    }
+
+    .create-card p {
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.7;
+      min-height: 70px;
+      margin-bottom: 20px;
+    }
+
+    .create-card button {
+      background: linear-gradient(110deg,#7045e9,#a15cf6);
+      padding: 12px 18px;
+      border-radius: 10px;
+      font-weight: 700;
+    }
+
+    .tool-panel {
+      display: none;
+      margin-top: 35px;
+      padding: 28px;
+      border: 1px solid var(--border);
+      border-radius: 22px;
+      background: #14182d;
+    }
+
+    .tool-panel.active {
+      display: block;
+      animation: appear .3s ease both;
+    }
+
+    .tool-panel h2 {
+      font: 700 26px 'Space Grotesk',sans-serif;
+      margin-bottom: 15px;
+    }
+
+    .tool-panel input,
+    .tool-panel textarea {
+      display: block;
+      width: 100%;
+      margin: 12px 0;
+      padding: 14px;
+      border-radius: 11px;
+      border: 1px solid var(--border);
+      background: #0c1020;
+      color: white;
+      outline: none;
+    }
+
+    .tool-panel input:focus,
+    .tool-panel textarea:focus {
+      border-color: var(--purple);
+    }
+
+    .tool-panel button {
+      background: var(--purple);
+      padding: 12px 18px;
+      border-radius: 10px;
+      font-weight: 700;
+      margin-top: 8px;
+    }
+
+    .tool-result {
+      margin-top: 20px;
+      padding: 18px;
+      background: rgba(139,92,246,.12);
+      border: 1px solid rgba(139,92,246,.25);
+      border-radius: 13px;
+      overflow-wrap: anywhere;
+    }
+
+    .tool-result:empty {
+      display: none;
+    }
+
+    @media(max-width:750px) {
+      .create-grid {
+        grid-template-columns: repeat(2,minmax(0,1fr));
+      }
+    }
+
+    @media(max-width:520px) {
+      .create-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <header class="navbar">
+    <a href="../index.html" class="logo">NOVARA</a>
+
+    <nav class="nav-links">
+      <a href="../index.html">Home</a>
+      <a href="discover.html">Discover</a>
+      <a href="play.html">Play</a>
+      <a href="create.html" class="active">Create</a>
+      <a href="connect.html">Connect</a>
+    </nav>
+
+    <div class="nav-actions">
+      <a href="../index.html" class="btn-primary">Home ↗</a>
+    </div>
+
+    <button class="menu-btn" aria-label="Open navigation" aria-expanded="false">☰</button>
+  </header>
+
+  <main>
+
+    <div class="create-hero">
+      <div class="eyebrow">YOUR CREATIVE UNIVERSE</div>
+      <h1>Imagine it. <span>Create it.</span></h1>
+      <p>Turn your ideas into something unique.<br>Your creativity has no limits.</p>
+    </div>
+
+    <section>
+      <div class="section-heading">
+        <div>
+          <h2>Creative studio</h2>
+          <p>Choose a tool and start creating.</p>
+        </div>
+      </div>
+
+      <div class="create-grid">
+
+        <article class="create-card">
+          <div class="icon">😂</div>
+          <h3>Meme Creator</h3>
+          <p>Write your own funny captions and create meme text.</p>
+          <button data-tool="meme">Open Studio →</button>
+        </article>
+
+        <article class="create-card">
+          <div class="icon">✨</div>
+          <h3>Username Generator</h3>
+          <p>Find a unique username for your digital identity.</p>
+          <button data-tool="username">Generate →</button>
+        </article>
+
+        <article class="create-card">
+          <div class="icon">🪪</div>
+          <h3>Profile Card</h3>
+          <p>Build a simple personal profile card with your details.</p>
+          <button data-tool="profile">Create Card →</button>
+        </article>
+
+        <article class="create-card">
+          <div class="icon">💬</div>
+          <h3>Quote Maker</h3>
+          <p>Turn your favourite words into a shareable quote.</p>
+          <button data-tool="quote">Make Quote →</button>
+        </article>
+
+        <article class="create-card">
+          <div class="icon">🎨</div>
+          <h3>Colour Explorer</h3>
+          <p>Explore colours and discover combinations.</p>
+          <button data-tool="color">Explore →</button>
+        </article>
+
+        <article class="create-card">
+          <div class="icon">🌌</div>
+          <h3>Idea Generator</h3>
+          <p>Get a creative prompt whenever you need inspiration.</p>
+          <button data-tool="idea">Get Ideas →</button>
+        </article>
+
+      </div>
+
+      <div class="tool-panel" id="toolPanel">
+        <h2 id="toolTitle">Creative Studio</h2>
+        <div id="toolBody"></div>
+        <div class="tool-result" id="toolResult" aria-live="polite"></div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <div class="footer-top">
+      <div>
+        <a href="../index.html" class="logo">NOVARA</a>
+        <p class="footer-description">Discover. Play. Create. Connect.</p>
+      </div>
+
+      <div class="footer-links">
+        <a href="../index.html">Home</a>
+        <a href="discover.html">Discover</a>
+        <a href="play.html">Play</a>
+        <a href="connect.html">Connect</a>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <span>© <span data-year></span> NOVARA</span>
+      <span>Made for imagination.</span>
+    </div>
+  </footer>
+
+  <script src="../js/app.js" defer></script>
+
+  <script>
+    const panel = document.getElementById("toolPanel");
+    const title = document.getElementById("toolTitle");
+    const body = document.getElementById("toolBody");
+    const result = document.getElementById("toolResult");
+
+    const usernameIdeas = [
+      "NovaPixel", "CosmicVibe", "ShadowSpark",
+      "NeonOrbit", "MysticNova", "PixelPhantom",
+      "LunarEcho", "CyberComet"
+    ];
+
+    const creativeIdeas = [
+      "Design a futuristic city in the year 2100.",
+      "Invent a new planet with its own rules.",
+      "Create a character with an unexpected superpower.",
+      "Imagine a world where colours have personalities.",
+      "Design a logo for a mysterious space organisation."
+    ];
+
+    function showTool(name) {
+      panel.classList.add("active");
+      result.textContent = "";
+      body.innerHTML = "";
+
+      const tools = {
+        meme: {
+          title: "😂 Meme Creator",
+          html: `
+            <input id="memeTop" maxlength="100" placeholder="Top caption">
+            <input id="memeBottom" maxlength="100" placeholder="Bottom caption">
+            <button id="makeMeme">Create Meme Text</button>
+          `,
+          action: () => {
+            const top = document.getElementById("memeTop").value.trim();
+            const bottom = document.getElementById("memeBottom").value.trim();
+
+            if (!top && !bottom) {
+              result.textContent = "Enter at least one caption.";
+              return;
+            }
+
+            result.textContent = `${top}\n\n${bottom}`;
+          }
+        },
+
+        username: {
+          title: "✨ Username Generator",
+          html: `<button id="generateUsername">Generate Username</button>`,
+          action: () => {
+            result.textContent =
+              usernameIdeas[Math.floor(Math.random() * usernameIdeas.length)] +
+              Math.floor(Math.random() * 99);
+          }
+        },
+
+        profile: {
+          title: "🪪 Profile Card",
+          html: `
+            <input id="profileName" maxlength="35" placeholder="Your display name">
+            <input id="profileBio" maxlength="100" placeholder="A little about you">
+            <button id="makeProfile">Create Profile</button>
+          `,
+          action: () => {
+            const name = document.getElementById("profileName").value.trim();
+            const bio = document.getElementById("profileBio").value.trim();
+
+            if (!name) {
+              result.textContent = "Enter a display name first.";
+              return;
+            }
+
+            result.textContent = `✦ ${name}\n${bio || "A NOVARA explorer."}`;
+          }
+        },
+
+        quote: {
+          title: "💬 Quote Maker",
+          html: `
+            <textarea id="quoteText" maxlength="250" placeholder="Write your quote..."></textarea>
+            <button id="makeQuote">Create Quote</button>
+          `,
+          action: () => {
+            const quote = document.getElementById("quoteText").value.trim();
+
+            result.textContent = quote
+              ? `“${quote}”`
+              : "Write something first.";
+          }
+        },
+
+        color: {
+          title: "🎨 Colour Explorer",
+          html: `
+            <input id="colorPicker" type="color" value="#8b5cf6">
+            <button id="showColor">Explore Colour</button>
+          `,
+          action: () => {
+            const color = document.getElementById("colorPicker").value;
+            result.innerHTML = "";
+            const swatch = document.createElement("div");
+            swatch.style.cssText =
+              `height:90px;border-radius:12px;background:${color};margin-bottom:12px`;
+            const label = document.createElement("strong");
+            label.textContent = color.toUpperCase();
+            result.append(swatch, label);
+          }
+        },
+
+        idea: {
+          title: "🌌 Idea Generator",
+          html: `<button id="generateIdea">Generate Creative Idea</button>`,
+          action: () => {
+            result.textContent =
+              creativeIdeas[Math.floor(Math.random() * creativeIdeas.length)];
+          }
+        }
+      };
+
+      const selected = tools[name];
+      if (!selected) return;
+
+      title.textContent = selected.title;
+      body.innerHTML = selected.html;
+
+      const actionButton = body.querySelector("button");
+
+      actionButton?.addEventListener("click", selected.action);
+
+      panel.scrollIntoView({
+        behavior: "smooth",
+        block: "center"
+      });
+    }
+
+    document.querySelectorAll("[data-tool]").forEach(button => {
+      button.addEventListener("click", () => {
+        showTool(button.dataset.tool);
+      });
+    });
+  </script>
+
+</body>
+</html>
