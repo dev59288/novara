@@ -7,6 +7,7 @@
   <meta name="theme-color" content="#090b18">
   <title>Discover | NOVARA</title>
   <link rel="stylesheet" href="../styles.css">
+
   <style>
     .discover-hero {
       padding: 90px 7% 45px;
@@ -46,6 +47,7 @@
     .discover-item:hover {
       transform: translateY(-7px);
       border-color: var(--purple);
+      box-shadow: 0 15px 40px rgba(139,92,246,.12);
     }
 
     .discover-item .visual {
@@ -71,11 +73,237 @@
       padding: 12px 17px;
       border-radius: 10px;
       font-weight: 700;
+      cursor: pointer;
+      border: 0;
     }
 
     .discover-item button:hover {
       background: var(--purple);
       color: white;
+    }
+
+    .discover-stats {
+      display: flex;
+      justify-content: center;
+      gap: 18px;
+      flex-wrap: wrap;
+      margin: 30px 0 0;
+    }
+
+    .discover-stat {
+      background: rgba(255,255,255,.04);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 13px 22px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .discover-stat strong {
+      color: white;
+      font-size: 20px;
+      display: block;
+      margin-bottom: 4px;
+    }
+
+    /* EXPERIENCE MODAL */
+
+    .experience-modal {
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+      background: rgba(3,5,15,.88);
+      backdrop-filter: blur(14px);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+    }
+
+    .experience-modal.open {
+      display: flex;
+    }
+
+    .experience-box {
+      width: min(650px,100%);
+      max-height: 90vh;
+      overflow-y: auto;
+      position: relative;
+      padding: 32px;
+      border-radius: 25px;
+      border: 1px solid rgba(167,139,250,.35);
+      background: linear-gradient(145deg,#191e38,#090d1d);
+      box-shadow: 0 25px 100px rgba(0,0,0,.5);
+      animation: experienceIn .3s ease;
+    }
+
+    @keyframes experienceIn {
+      from { opacity: 0; transform: translateY(20px) scale(.97); }
+      to { opacity: 1; transform: translateY(0) scale(1); }
+    }
+
+    .experience-close {
+      position: absolute;
+      right: 18px;
+      top: 15px;
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      color: white;
+      background: rgba(255,255,255,.08);
+      font-size: 22px;
+      cursor: pointer;
+      border: 0;
+    }
+
+    .experience-tag {
+      color: #a78bfa;
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 14px;
+    }
+
+    .experience-box h2 {
+      font-size: clamp(25px,5vw,36px);
+      margin: 0 0 12px;
+    }
+
+    .experience-description {
+      color: var(--muted);
+      line-height: 1.7;
+      margin-bottom: 24px;
+    }
+
+    .experience-progress {
+      height: 7px;
+      background: rgba(255,255,255,.08);
+      border-radius: 20px;
+      overflow: hidden;
+      margin: 20px 0;
+    }
+
+    .experience-progress span {
+      display: block;
+      width: 0;
+      height: 100%;
+      background: linear-gradient(90deg,#8b5cf6,#55d6ff);
+      transition: width .3s;
+    }
+
+    .experience-question {
+      font-size: 19px;
+      font-weight: 700;
+      line-height: 1.5;
+      margin: 20px 0;
+    }
+
+    .experience-options {
+      display: grid;
+      gap: 11px;
+    }
+
+    .experience-option {
+      text-align: left;
+      width: 100%;
+      padding: 15px 17px;
+      border-radius: 13px;
+      background: rgba(255,255,255,.045);
+      color: white;
+      border: 1px solid rgba(255,255,255,.1);
+      cursor: pointer;
+      transition: .2s;
+      font-size: 14px;
+    }
+
+    .experience-option:hover:not(:disabled) {
+      border-color: #a78bfa;
+      background: rgba(139,92,246,.16);
+      transform: translateX(3px);
+    }
+
+    .experience-option:disabled {
+      cursor: default;
+      opacity: .85;
+    }
+
+    .experience-option.correct {
+      border-color: #34d399;
+      background: rgba(52,211,153,.15);
+    }
+
+    .experience-option.wrong {
+      border-color: #fb7185;
+      background: rgba(251,113,133,.12);
+    }
+
+    .experience-feedback {
+      min-height: 25px;
+      margin-top: 15px;
+      font-size: 14px;
+      color: #a78bfa;
+    }
+
+    .experience-action {
+      display: inline-block;
+      margin-top: 20px;
+      padding: 13px 23px;
+      border-radius: 12px;
+      background: linear-gradient(90deg,#8b5cf6,#6366f1);
+      color: white;
+      border: 0;
+      cursor: pointer;
+      font-weight: 800;
+    }
+
+    .experience-action:disabled {
+      opacity: .5;
+      cursor: not-allowed;
+    }
+
+    .experience-result {
+      text-align: center;
+      padding: 20px 0;
+    }
+
+    .experience-result .result-icon {
+      font-size: 65px;
+      margin-bottom: 15px;
+    }
+
+    .experience-result h2 {
+      margin-bottom: 12px;
+    }
+
+    .experience-result p {
+      color: var(--muted);
+      line-height: 1.7;
+    }
+
+    .fact-card {
+      border-radius: 20px;
+      padding: 30px 20px;
+      text-align: center;
+      background: rgba(139,92,246,.1);
+      border: 1px solid rgba(139,92,246,.3);
+      margin: 20px 0;
+    }
+
+    .fact-card .fact-icon {
+      font-size: 48px;
+      margin-bottom: 15px;
+    }
+
+    .fact-card p {
+      font-size: 18px;
+      line-height: 1.7;
+    }
+
+    .fact-counter {
+      color: var(--muted);
+      font-size: 13px;
+      margin-top: 15px;
     }
 
     @media(max-width:750px) {
@@ -87,6 +315,24 @@
     @media(max-width:520px) {
       .discover-grid {
         grid-template-columns: 1fr;
+      }
+
+      .experience-box {
+        padding: 25px 19px;
+      }
+
+      .discover-hero {
+        padding-top: 65px;
+      }
+    }
+
+    @media(prefers-reduced-motion:reduce) {
+      .experience-box {
+        animation: none;
+      }
+
+      .discover-item {
+        transition: none;
       }
     }
   </style>
@@ -117,6 +363,17 @@
       <div class="eyebrow">THE WORLD OF DISCOVERY</div>
       <h1>Explore the <span>Unexpected.</span></h1>
       <p>Discover your personality, challenge your knowledge<br>and find something new every day.</p>
+
+      <div class="discover-stats">
+        <div class="discover-stat">
+          <strong id="discoverPlayed">0</strong>
+          Experiences played
+        </div>
+        <div class="discover-stat">
+          <strong id="discoverPoints">0</strong>
+          Points earned
+        </div>
+      </div>
     </div>
 
     <section>
@@ -133,42 +390,42 @@
           <div class="visual">🧠</div>
           <h3>Personality Quiz</h3>
           <p>Explore your personality through fun interactive questions.</p>
-          <button data-experience="Personality Quiz">Explore →</button>
+          <button type="button" data-experience="personality">Explore →</button>
         </article>
 
         <article class="discover-item">
           <div class="visual">🌍</div>
           <h3>World Trivia</h3>
           <p>Test what you know about the world around you.</p>
-          <button data-experience="World Trivia">Explore →</button>
+          <button type="button" data-experience="trivia">Explore →</button>
         </article>
 
         <article class="discover-item">
           <div class="visual">⚡</div>
           <h3>Quick Facts</h3>
           <p>Discover surprising facts and fascinating information.</p>
-          <button data-experience="Quick Facts">Explore →</button>
+          <button type="button" data-experience="facts">Explore →</button>
         </article>
 
         <article class="discover-item">
           <div class="visual">🎬</div>
           <h3>Movie Universe</h3>
           <p>Explore movie-themed quizzes and entertainment challenges.</p>
-          <button data-experience="Movie Universe">Explore →</button>
+          <button type="button" data-experience="movies">Explore →</button>
         </article>
 
         <article class="discover-item">
           <div class="visual">🔮</div>
           <h3>What Are You?</h3>
           <p>Answer creative questions and reveal your fun result.</p>
-          <button data-experience="What Are You?">Explore →</button>
+          <button type="button" data-experience="what">Explore →</button>
         </article>
 
         <article class="discover-item">
           <div class="visual">🏆</div>
           <h3>Daily Challenge</h3>
           <p>Take on a fresh discovery challenge every day.</p>
-          <button data-experience="Daily Challenge">Explore →</button>
+          <button type="button" data-experience="daily">Explore →</button>
         </article>
 
       </div>
@@ -196,16 +453,311 @@
     </div>
   </footer>
 
+  <!-- EXPERIENCE WINDOW -->
+
+  <div class="experience-modal" id="experienceModal" role="dialog" aria-modal="true" aria-labelledby="experienceTitle">
+    <div class="experience-box">
+      <button class="experience-close" id="closeExperience" aria-label="Close">×</button>
+      <div id="experienceContent"></div>
+    </div>
+  </div>
+
   <script src="../js/app.js" defer></script>
 
   <script>
-    document.querySelectorAll("[data-experience]").forEach(button => {
-      button.addEventListener("click", () => {
-        const name = button.dataset.experience;
-        alert(name + " experience is coming soon!");
-      });
-    });
-  </script>
+    "use strict";
 
-</body>
-</html>
+    const modal = document.getElementById("experienceModal");
+    const content = document.getElementById("experienceContent");
+
+    const storageKey = "novara_discover_stats";
+
+    let currentExperience = "";
+    let currentQuestion = 0;
+    let currentScore = 0;
+    let currentAnswers = [];
+    let currentQuestions = [];
+    let selectedAnswer = false;
+
+    const experiences = {
+
+      trivia: {
+        title: "World Trivia",
+        subtitle: "Test your knowledge of the world.",
+        icon: "🌍",
+        questions: [
+          {
+            q: "Which is the largest ocean on Earth?",
+            options: ["Atlantic Ocean", "Pacific Ocean", "Indian Ocean", "Arctic Ocean"],
+            answer: 1,
+            info: "The Pacific Ocean is the largest ocean on Earth."
+          },
+          {
+            q: "What is the capital of Japan?",
+            options: ["Seoul", "Beijing", "Tokyo", "Bangkok"],
+            answer: 2,
+            info: "Tokyo is the capital of Japan."
+          },
+          {
+            q: "Which planet is known as the Red Planet?",
+            options: ["Venus", "Mars", "Jupiter", "Mercury"],
+            answer: 1,
+            info: "Mars looks reddish because of iron-rich dust on its surface."
+          },
+          {
+            q: "Which is the largest continent?",
+            options: ["Africa", "Europe", "Asia", "Australia"],
+            answer: 2,
+            info: "Asia is the largest continent by area and population."
+          },
+          {
+            q: "How many colours are traditionally listed in a rainbow?",
+            options: ["Five", "Six", "Seven", "Eight"],
+            answer: 2,
+            info: "A traditional rainbow is described using seven colours."
+          }
+        ]
+      },
+
+      movies: {
+        title: "Movie Universe",
+        subtitle: "How well do you know movies?",
+        icon: "🎬",
+        questions: [
+          {
+            q: "Which fictional school does Harry Potter attend?",
+            options: ["Narnia Academy", "Hogwarts", "Nevermore", "Starfleet"],
+            answer: 1,
+            info: "Harry Potter attends Hogwarts School of Witchcraft and Wizardry."
+          },
+          {
+            q: "What is the name of the cowboy in Toy Story?",
+            options: ["Buzz", "Woody", "Andy", "Rex"],
+            answer: 1,
+            info: "Woody is the famous cowboy toy in Toy Story."
+          },
+          {
+            q: "Which superhero is also known as the Dark Knight?",
+            options: ["Superman", "Iron Man", "Batman", "Thor"],
+            answer: 2,
+            info: "Batman is famously known as the Dark Knight."
+          },
+          {
+            q: "In Frozen, what is the name of Elsa's sister?",
+            options: ["Anna", "Moana", "Rapunzel", "Belle"],
+            answer: 0,
+            info: "Anna is Elsa's younger sister."
+          },
+          {
+            q: "Which film features the character Jack Sparrow?",
+            options: ["The Jungle Book", "Pirates of the Caribbean", "Avatar", "Jumanji"],
+            answer: 1,
+            info: "Jack Sparrow is a central character in Pirates of the Caribbean."
+          }
+        ]
+      },
+
+      personality: {
+        title: "Personality Quiz",
+        subtitle: "Discover your fun personality type.",
+        icon: "🧠",
+        questions: [
+          {
+            q: "Your perfect weekend would be...",
+            options: ["Exploring somewhere new", "Relaxing with friends", "Learning something new", "Creating something"],
+            answer: 0,
+            type: "explorer"
+          },
+          {
+            q: "In a group project, you usually...",
+            options: ["Take the lead", "Keep everyone together", "Find the solution", "Bring creative ideas"],
+            answer: 0,
+            type: "leader"
+          },
+          {
+            q: "What excites you most?",
+            options: ["New adventures", "Strong friendships", "Interesting mysteries", "Original ideas"],
+            answer: 2,
+            type: "thinker"
+          },
+          {
+            q: "Choose your ideal superpower.",
+            options: ["Teleportation", "Healing", "Super intelligence", "Creating anything"],
+            answer: 3,
+            type: "creator"
+          }
+        ]
+      },
+
+      what: {
+        title: "What Are You?",
+        subtitle: "Find your fun NOVARA identity.",
+        icon: "🔮",
+        questions: [
+          {
+            q: "Choose a place to explore.",
+            options: ["A hidden forest", "A futuristic city", "An ancient library", "A magical island"],
+            answer: 0,
+            type: "explorer"
+          },
+          {
+            q: "Choose an object.",
+            options: ["A compass", "A crown", "A book", "A paintbrush"],
+            answer: 0,
+            type: "explorer"
+          },
+          {
+            q: "Choose your favourite activity.",
+            options: ["Travelling", "Leading a team", "Solving puzzles", "Making art"],
+            answer: 0,
+            type: "explorer"
+          },
+          {
+            q: "Choose a special ability.",
+            options: ["Discover hidden places", "Inspire others", "Understand everything", "Imagine new worlds"],
+            answer: 0,
+            type: "explorer"
+          }
+        ]
+      }
+    };
+
+    const personalityResults = {
+      explorer: {
+        icon: "🧭",
+        name: "The Explorer",
+        description: "You love discovering new things, exploring possibilities and stepping into the unknown."
+      },
+      leader: {
+        icon: "👑",
+        name: "The Leader",
+        description: "You enjoy taking initiative, making decisions and helping people move forward."
+      },
+      thinker: {
+        icon: "🧩",
+        name: "The Thinker",
+        description: "Curiosity drives you. You enjoy questions, ideas and understanding how things work."
+      },
+      creator: {
+        icon: "🎨",
+        name: "The Creator",
+        description: "Your imagination is your strength. You enjoy turning original ideas into something new."
+      }
+    };
+
+    const facts = [
+      {
+        icon: "🌌",
+        text: "A day on Venus is longer than a year on Venus."
+      },
+      {
+        icon: "🐙",
+        text: "An octopus has three hearts."
+      },
+      {
+        icon: "🌳",
+        text: "Some bamboo species can grow extremely quickly, under suitable conditions."
+      },
+      {
+        icon: "🪐",
+        text: "Saturn is less dense than water on average."
+      },
+      {
+        icon: "🦋",
+        text: "Butterflies taste using sensors on their feet."
+      },
+      {
+        icon: "🌊",
+        text: "The Pacific Ocean is larger than all Earth's land area combined."
+      },
+      {
+        icon: "🐬",
+        text: "Dolphins use distinctive whistles to identify one another."
+      },
+      {
+        icon: "🌙",
+        text: "The Moon moves gradually farther away from Earth each year."
+      }
+    ];
+
+    function getStats() {
+      try {
+        return JSON.parse(localStorage.getItem(storageKey)) || {
+          played: 0,
+          points: 0
+        };
+      } catch {
+        return { played: 0, points: 0 };
+      }
+    }
+
+    function saveStats(points) {
+      const stats = getStats();
+      stats.played += 1;
+      stats.points += points;
+
+      localStorage.setItem(storageKey, JSON.stringify(stats));
+      updateStats();
+    }
+
+    function updateStats() {
+      const stats = getStats();
+      document.getElementById("discoverPlayed").textContent = stats.played;
+      document.getElementById("discoverPoints").textContent = stats.points;
+    }
+
+    function openModal() {
+      modal.classList.add("open");
+      document.body.style.overflow = "hidden";
+    }
+
+    function closeModal() {
+      modal.classList.remove("open");
+      document.body.style.overflow = "";
+    }
+
+    function startExperience(type) {
+      currentExperience = type;
+      currentQuestion = 0;
+      currentScore = 0;
+      currentAnswers = [];
+      selectedAnswer = false;
+
+      if (type === "facts") {
+        showFact(0);
+        openModal();
+        return;
+      }
+
+      if (type === "daily") {
+        startDailyChallenge();
+        openModal();
+        return;
+      }
+
+      const experience = experiences[type];
+
+      if (!experience) return;
+
+      currentQuestions = experience.questions;
+
+      content.innerHTML = `
+        <div class="experience-tag">${experience.icon} NOVARA EXPERIENCE</div>
+        <h2 id="experienceTitle">${experience.title}</h2>
+        <p class="experience-description">${experience.subtitle}</p>
+        <div id="questionArea"></div>
+      `;
+
+      openModal();
+      showQuestion();
+    }
+
+    function showQuestion() {
+      const experience = experiences[currentExperience];
+      const question = currentQuestions[currentQuestion];
+
+      selectedAnswer = false;
+
+      const progress = ((currentQuestion) / currentQuestions.length) * 100;
+
+      content.innerHTM
