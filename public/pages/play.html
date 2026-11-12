@@ -1,4 +1,4 @@
-
+Writing
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -28,6 +28,33 @@
     .play-hero p {
       color: var(--muted);
       line-height: 1.8;
+    }
+
+    .play-stats {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      flex-wrap: wrap;
+      margin: 30px auto 0;
+    }
+
+    .stat-box {
+      min-width: 125px;
+      padding: 15px 22px;
+      background: rgba(255,255,255,.045);
+      border: 1px solid var(--border);
+      border-radius: 15px;
+    }
+
+    .stat-box strong {
+      display: block;
+      font-size: 24px;
+      color: #a78bfa;
+    }
+
+    .stat-box span {
+      color: var(--muted);
+      font-size: 12px;
     }
 
     .game-grid {
@@ -72,9 +99,11 @@
 
     .game-card button {
       background: linear-gradient(110deg,#7045e9,#a15cf6);
+      color: white;
       padding: 12px 18px;
       border-radius: 10px;
       font-weight: 700;
+      cursor: pointer;
     }
 
     .game-card button:hover {
@@ -86,11 +115,12 @@
       position: fixed;
       inset: 0;
       z-index: 120;
-      background: rgba(5,7,17,.9);
+      background: rgba(5,7,17,.92);
       backdrop-filter: blur(12px);
       align-items: center;
       justify-content: center;
-      padding: 20px;
+      padding: 15px;
+      overflow-y: auto;
     }
 
     .game-modal.active {
@@ -98,37 +128,203 @@
     }
 
     .modal-content {
-      width: min(500px,100%);
-      background: #171c34;
+      width: min(560px,100%);
+      max-height: 90vh;
+      overflow-y: auto;
+      background: linear-gradient(145deg,#1b2040,#111529);
       border: 1px solid var(--border);
       border-radius: 22px;
-      padding: 30px;
+      padding: 25px;
       text-align: center;
+      position: relative;
+      box-shadow: 0 20px 70px rgba(0,0,0,.45);
+    }
+
+    .modal-close {
+      position: absolute;
+      right: 18px;
+      top: 15px;
+      background: transparent;
+      color: white;
+      font-size: 23px;
+      cursor: pointer;
+    }
+
+    .game-icon-large {
+      font-size: 43px;
+      margin: 12px 0;
     }
 
     .modal-content h2 {
       font: 700 27px 'Space Grotesk',sans-serif;
-      margin-bottom: 12px;
+      margin-bottom: 10px;
     }
 
-    .modal-content p {
+    .game-subtitle {
       color: var(--muted);
       line-height: 1.7;
       margin-bottom: 20px;
+      font-size: 14px;
     }
 
-    .modal-content button {
-      background: var(--purple);
-      padding: 12px 20px;
-      border-radius: 10px;
+    .game-progress {
+      height: 7px;
+      background: rgba(255,255,255,.09);
+      border-radius: 20px;
+      overflow: hidden;
+      margin: 18px 0;
+    }
+
+    .game-progress-fill {
+      height: 100%;
+      width: 0;
+      background: linear-gradient(90deg,#8b5cf6,#55d6ff);
+      transition: width .3s;
+    }
+
+    .game-question {
+      font-size: 19px;
       font-weight: 700;
+      line-height: 1.5;
+      margin: 20px 0;
     }
 
-    .modal-close {
-      float: right;
-      background: transparent !important;
-      font-size: 22px;
-      padding: 0 !important;
+    .game-options {
+      display: grid;
+      gap: 10px;
+      margin: 18px 0;
+    }
+
+    .game-option {
+      width: 100%;
+      text-align: left;
+      padding: 13px 15px;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      color: white;
+      background: rgba(255,255,255,.045);
+      cursor: pointer;
+      transition: .2s;
+    }
+
+    .game-option:hover:not(:disabled) {
+      border-color: #9b7bff;
+      background: rgba(139,92,246,.13);
+    }
+
+    .game-option.correct {
+      border-color: #36d399;
+      background: rgba(54,211,153,.13);
+    }
+
+    .game-option.wrong {
+      border-color: #fb7185;
+      background: rgba(251,113,133,.13);
+    }
+
+    .game-feedback {
+      min-height: 25px;
+      font-size: 14px;
+      color: #a78bfa;
+      margin: 12px 0;
+      line-height: 1.5;
+    }
+
+    .game-main-btn {
+      width: 100%;
+      padding: 13px 18px;
+      border-radius: 12px;
+      background: linear-gradient(110deg,#7045e9,#a15cf6);
+      color: white;
+      font-weight: 700;
+      cursor: pointer;
+      margin-top: 8px;
+    }
+
+    .game-main-btn:disabled {
+      opacity: .45;
+      cursor: not-allowed;
+    }
+
+    .game-secondary-btn {
+      background: rgba(255,255,255,.07);
+      border: 1px solid var(--border);
+      color: white;
+      padding: 11px 16px;
+      border-radius: 10px;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+
+    .game-input {
+      width: 100%;
+      padding: 14px;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      background: rgba(255,255,255,.06);
+      color: white;
+      outline: none;
+      margin: 12px 0;
+      font-size: 16px;
+    }
+
+    .game-input:focus {
+      border-color: #9b7bff;
+    }
+
+    .memory-grid {
+      display: grid;
+      grid-template-columns: repeat(4,1fr);
+      gap: 9px;
+      margin: 20px 0;
+    }
+
+    .memory-card {
+      aspect-ratio: 1;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      background: linear-gradient(145deg,#34275c,#171d37);
+      color: white;
+      font-size: 27px;
+      cursor: pointer;
+      transition: .2s;
+    }
+
+    .memory-card:hover {
+      border-color: #a78bfa;
+      transform: scale(1.03);
+    }
+
+    .memory-card.matched {
+      background: rgba(54,211,153,.15);
+      border-color: #36d399;
+      cursor: default;
+    }
+
+    .game-result {
+      padding: 22px 10px;
+    }
+
+    .result-icon {
+      font-size: 55px;
+      margin-bottom: 10px;
+    }
+
+    .result-score {
+      font-size: 42px;
+      font-weight: 800;
+      color: #a78bfa;
+      margin: 12px 0;
+    }
+
+    .mystery-scene {
+      padding: 18px;
+      border-radius: 15px;
+      background: rgba(139,92,246,.09);
+      border: 1px solid var(--border);
+      line-height: 1.8;
+      color: #e5e7eb;
+      margin: 15px 0;
     }
 
     @media(max-width:750px) {
@@ -141,157 +337,457 @@
       .game-grid {
         grid-template-columns: 1fr;
       }
+
+      .modal-content {
+        padding: 22px 17px;
+      }
+
+      .play-hero {
+        padding-top: 65px;
+      }
     }
   </style>
 </head>
 
 <body>
 
-  <header class="navbar">
-    <a href="../index.html" class="logo">NOVARA</a>
+<header class="navbar">
+  <a href="../index.html" class="logo">NOVARA</a>
 
-    <nav class="nav-links">
+  <nav class="nav-links">
+    <a href="../index.html">Home</a>
+    <a href="discover.html">Discover</a>
+    <a href="play.html" class="active">Play</a>
+    <a href="create.html">Create</a>
+    <a href="connect.html">Connect</a>
+  </nav>
+
+  <div class="nav-actions">
+    <a href="../index.html" class="btn-primary">Home ↗</a>
+  </div>
+
+  <button class="menu-btn" aria-label="Open navigation" aria-expanded="false">☰</button>
+</header>
+
+<main>
+
+  <section class="play-hero">
+    <div class="eyebrow">ENTER THE GAME ZONE</div>
+    <h1>Ready. Set. <span>Play.</span></h1>
+    <p>Challenge your mind, solve puzzles and explore<br>new ways to have fun.</p>
+
+    <div class="play-stats">
+      <div class="stat-box">
+        <strong id="totalPoints">0</strong>
+        <span>Total Points</span>
+      </div>
+      <div class="stat-box">
+        <strong id="gamesPlayed">0</strong>
+        <span>Games Played</span>
+      </div>
+      <div class="stat-box">
+        <strong>6</strong>
+        <span>Games Available</span>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="section-heading">
+      <div>
+        <h2>Choose your game</h2>
+        <p>Your next challenge starts here.</p>
+      </div>
+    </div>
+
+    <div class="game-grid">
+
+      <article class="game-card">
+        <div class="game-icon">🧩</div>
+        <h3>Brain Puzzles</h3>
+        <p>Exercise your thinking with clever puzzles and tricky questions.</p>
+        <button data-game="brain">Play Now →</button>
+      </article>
+
+      <article class="game-card">
+        <div class="game-icon">🔢</div>
+        <h3>Number Challenge</h3>
+        <p>Test your number skills with quick mathematical challenges.</p>
+        <button data-game="number">Play Now →</button>
+      </article>
+
+      <article class="game-card">
+        <div class="game-icon">🕵️</div>
+        <h3>Mystery Room</h3>
+        <p>Follow clues, think carefully and solve a fictional mystery.</p>
+        <button data-game="mystery">Play Now →</button>
+      </article>
+
+      <article class="game-card">
+        <div class="game-icon">⚡</div>
+        <h3>Quick Quiz</h3>
+        <p>Answer fun questions and see how much you know.</p>
+        <button data-game="quiz">Play Now →</button>
+      </article>
+
+      <article class="game-card">
+        <div class="game-icon">🎯</div>
+        <h3>Memory Match</h3>
+        <p>Challenge your memory with a matching game.</p>
+        <button data-game="memory">Play Now →</button>
+      </article>
+
+      <article class="game-card">
+        <div class="game-icon">🌌</div>
+        <h3>Word Quest</h3>
+        <p>Explore words, solve clues and discover hidden answers.</p>
+        <button data-game="word">Play Now →</button>
+      </article>
+
+    </div>
+  </section>
+
+</main>
+
+<div class="game-modal" id="gameModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+  <div class="modal-content">
+    <button class="modal-close" id="closeModal" aria-label="Close">✕</button>
+    <div class="game-icon-large" id="gameIcon">🎮</div>
+    <h2 id="modalTitle">NOVARA Game</h2>
+    <p class="game-subtitle" id="gameSubtitle">Choose your challenge.</p>
+    <div id="gameArea"></div>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-top">
+    <div>
+      <a href="../index.html" class="logo">NOVARA</a>
+      <p class="footer-description">Discover. Play. Create. Connect.</p>
+    </div>
+
+    <div class="footer-links">
       <a href="../index.html">Home</a>
       <a href="discover.html">Discover</a>
-      <a href="play.html" class="active">Play</a>
       <a href="create.html">Create</a>
       <a href="connect.html">Connect</a>
-    </nav>
-
-    <div class="nav-actions">
-      <a href="../index.html" class="btn-primary">Home ↗</a>
-    </div>
-
-    <button class="menu-btn" aria-label="Open navigation" aria-expanded="false">☰</button>
-  </header>
-
-  <main>
-
-    <div class="play-hero">
-      <div class="eyebrow">ENTER THE GAME ZONE</div>
-      <h1>Ready. Set. <span>Play.</span></h1>
-      <p>Challenge your mind, solve puzzles and explore<br>new ways to have fun.</p>
-    </div>
-
-    <section>
-      <div class="section-heading">
-        <div>
-          <h2>Choose your game</h2>
-          <p>Your next challenge starts here.</p>
-        </div>
-      </div>
-
-      <div class="game-grid">
-
-        <article class="game-card">
-          <div class="game-icon">🧩</div>
-          <h3>Brain Puzzles</h3>
-          <p>Exercise your thinking with clever puzzles and tricky questions.</p>
-          <button data-game="Brain Puzzles">Play Now →</button>
-        </article>
-
-        <article class="game-card">
-          <div class="game-icon">🔢</div>
-          <h3>Number Challenge</h3>
-          <p>Test your number skills with quick mathematical challenges.</p>
-          <button data-game="Number Challenge">Play Now →</button>
-        </article>
-
-        <article class="game-card">
-          <div class="game-icon">🕵️</div>
-          <h3>Mystery Room</h3>
-          <p>Follow clues, think carefully and solve a fictional mystery.</p>
-          <button data-game="Mystery Room">Play Now →</button>
-        </article>
-
-        <article class="game-card">
-          <div class="game-icon">⚡</div>
-          <h3>Quick Quiz</h3>
-          <p>Answer fun questions and see how much you know.</p>
-          <button data-game="Quick Quiz">Play Now →</button>
-        </article>
-
-        <article class="game-card">
-          <div class="game-icon">🎯</div>
-          <h3>Memory Match</h3>
-          <p>Challenge your memory with a matching game.</p>
-          <button data-game="Memory Match">Play Now →</button>
-        </article>
-
-        <article class="game-card">
-          <div class="game-icon">🌌</div>
-          <h3>Word Quest</h3>
-          <p>Explore words, solve clues and discover hidden answers.</p>
-          <button data-game="Word Quest">Play Now →</button>
-        </article>
-
-      </div>
-    </section>
-
-  </main>
-
-  <div class="game-modal" id="gameModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
-    <div class="modal-content">
-      <button class="modal-close" id="closeModal" aria-label="Close">✕</button>
-      <div style="font-size:45px;margin:20px 0;">🎮</div>
-      <h2 id="modalTitle">Game</h2>
-      <p id="modalDescription">This game is being prepared.</p>
-      <button id="modalAction">Got it</button>
     </div>
   </div>
 
-  <footer>
-    <div class="footer-top">
-      <div>
-        <a href="../index.html" class="logo">NOVARA</a>
-        <p class="footer-description">Discover. Play. Create. Connect.</p>
+  <div class="footer-bottom">
+    <span>© <span data-year></span> NOVARA</span>
+    <span>Play beyond limits.</span>
+  </div>
+</footer>
+
+<script src="../js/app.js" defer></script>
+
+<script>
+(() => {
+  "use strict";
+
+  const modal = document.getElementById("gameModal");
+  const title = document.getElementById("modalTitle");
+  const subtitle = document.getElementById("gameSubtitle");
+  const icon = document.getElementById("gameIcon");
+  const area = document.getElementById("gameArea");
+
+  const storageKey = "novara_play_stats_v1";
+
+  let stats = loadStats();
+  let currentGame = "";
+  let questionIndex = 0;
+  let score = 0;
+  let answered = false;
+  let memoryState = {};
+  let wordState = {};
+
+  function loadStats() {
+    try {
+      return JSON.parse(localStorage.getItem(storageKey)) || {
+        points: 0,
+        games: 0
+      };
+    } catch {
+      return { points: 0, games: 0 };
+    }
+  }
+
+  function saveStats() {
+    try {
+      localStorage.setItem(storageKey, JSON.stringify(stats));
+    } catch {}
+    updateStats();
+  }
+
+  function updateStats() {
+    document.getElementById("totalPoints").textContent = stats.points;
+    document.getElementById("gamesPlayed").textContent = stats.games;
+  }
+
+  updateStats();
+
+  const games = {
+    brain: {
+      title: "Brain Puzzles",
+      icon: "🧩",
+      description: "Solve five clever riddles. Each correct answer earns 10 points.",
+      questions: [
+        {
+          q: "What has keys but cannot open locks?",
+          options: ["A piano", "A map", "A clock", "A book"],
+          answer: 0,
+          info: "A piano has musical keys."
+        },
+        {
+          q: "What gets wetter as it dries?",
+          options: ["A cloud", "A towel", "A sponge", "A river"],
+          answer: 1,
+          info: "A towel absorbs water while drying."
+        },
+        {
+          q: "What has a neck but no head?",
+          options: ["A giraffe", "A bottle", "A tree", "A shirt"],
+          answer: 1,
+          info: "A bottle has a neck."
+        },
+        {
+          q: "What can travel around the world while staying in one corner?",
+          options: ["A stamp", "A plane", "A shadow", "A clock"],
+          answer: 0,
+          info: "A postage stamp stays in the corner of an envelope."
+        },
+        {
+          q: "What has many teeth but cannot bite?",
+          options: ["A shark", "A comb", "A lion", "A zipper"],
+          answer: 1,
+          info: "A comb has teeth but cannot bite."
+        }
+      ]
+    },
+
+    number: {
+      title: "Number Challenge",
+      icon: "🔢",
+      description: "Find the correct answer to five number challenges.",
+      questions: [
+        {
+          q: "What comes next: 2, 4, 8, 16, ?",
+          options: ["20", "24", "32", "30"],
+          answer: 2,
+          info: "Each number is multiplied by 2."
+        },
+        {
+          q: "What is 15 × 6?",
+          options: ["80", "90", "95", "85"],
+          answer: 1,
+          info: "15 × 6 = 90."
+        },
+        {
+          q: "What comes next: 3, 6, 11, 18, ?",
+          options: ["25", "26", "27", "29"],
+          answer: 2,
+          info: "Add 3, then 5, then 7, then 9."
+        },
+        {
+          q: "Half of 90 plus 10 equals?",
+          options: ["45", "50", "55", "60"],
+          answer: 2,
+          info: "Half of 90 is 45. Add 10 to get 55."
+        },
+        {
+          q: "Which is the smallest prime number?",
+          options: ["0", "1", "2", "3"],
+          answer: 2,
+          info: "2 is the smallest prime number."
+        }
+      ]
+    },
+
+    quiz: {
+      title: "Quick Quiz",
+      icon: "⚡",
+      description: "Five quick general knowledge questions.",
+      questions: [
+        {
+          q: "Which planet is known as the Red Planet?",
+          options: ["Venus", "Mars", "Jupiter", "Mercury"],
+          answer: 1,
+          info: "Mars appears reddish because of iron-rich dust."
+        },
+        {
+          q: "How many sides does a hexagon have?",
+          options: ["5", "6", "7", "8"],
+          answer: 1,
+          info: "A hexagon has six sides."
+        },
+        {
+          q: "Which is the largest ocean?",
+          options: ["Atlantic", "Indian", "Pacific", "Arctic"],
+          answer: 2,
+          info: "The Pacific Ocean is the largest."
+        },
+        {
+          q: "Which gas do plants absorb during photosynthesis?",
+          options: ["Oxygen", "Nitrogen", "Carbon dioxide", "Hydrogen"],
+          answer: 2,
+          info: "Plants use carbon dioxide during photosynthesis."
+        },
+        {
+          q: "What is the capital of Japan?",
+          options: ["Seoul", "Tokyo", "Beijing", "Bangkok"],
+          answer: 1,
+          info: "Tokyo is the capital of Japan."
+        }
+      ]
+    }
+  };
+
+  function openModal(gameId) {
+    currentGame = gameId;
+    modal.classList.add("active");
+    document.body.style.overflow = "hidden";
+
+    if (games[gameId]) {
+      startQuizGame(gameId);
+    } else if (gameId === "mystery") {
+      startMystery();
+    } else if (gameId === "memory") {
+      startMemory();
+    } else if (gameId === "word") {
+      startWordQuest();
+    }
+  }
+
+  function closeModal() {
+    modal.classList.remove("active");
+    document.body.style.overflow = "";
+    area.innerHTML = "";
+  }
+
+  document.querySelectorAll("[data-game]").forEach(button => {
+    button.addEventListener("click", () => openModal(button.dataset.game));
+  });
+
+  document.getElementById("closeModal").addEventListener("click", closeModal);
+
+  modal.addEventListener("click", event => {
+    if (event.target === modal) closeModal();
+  });
+
+  document.addEventListener("keydown", event => {
+    if (event.key === "Escape" && modal.classList.contains("active")) {
+      closeModal();
+    }
+  });
+
+  function startQuizGame(gameId) {
+    const game = games[gameId];
+    questionIndex = 0;
+    score = 0;
+    answered = false;
+
+    title.textContent = game.title;
+    icon.textContent = game.icon;
+    subtitle.textContent = game.description;
+
+    renderQuizQuestion();
+  }
+
+  function renderQuizQuestion() {
+    const game = games[currentGame];
+    const question = game.questions[questionIndex];
+    answered = false;
+
+    area.innerHTML = `
+      <div style="display:flex;justify-content:space-between;font-size:13px;color:#aaa">
+        <span>Question ${questionIndex + 1} of ${game.questions.length}</span>
+        <span>Score: ${score}</span>
       </div>
-
-      <div class="footer-links">
-        <a href="../index.html">Home</a>
-        <a href="discover.html">Discover</a>
-        <a href="create.html">Create</a>
-        <a href="connect.html">Connect</a>
+      <div class="game-progress">
+        <div class="game-progress-fill" style="width:${questionIndex / game.questions.length * 100}%"></div>
       </div>
-    </div>
+      <div class="game-question">${question.q}</div>
+      <div class="game-options">
+        ${question.options.map((option, index) => `
+          <button class="game-option" data-answer="${index}">
+            ${String.fromCharCode(65 + index)}. ${option}
+          </button>
+        `).join("")}
+      </div>
+      <div class="game-feedback" id="feedback"></div>
+      <button class="game-main-btn" id="nextQuestion" disabled>
+        ${questionIndex === game.questions.length - 1 ? "See Results" : "Next Question →"}
+      </button>
+    `;
 
-    <div class="footer-bottom">
-      <span>© <span data-year></span> NOVARA</span>
-      <span>Play beyond limits.</span>
-    </div>
-  </footer>
-
-  <script src="../js/app.js" defer></script>
-
-  <script>
-    const modal = document.getElementById("gameModal");
-    const modalTitle = document.getElementById("modalTitle");
-    const modalDescription = document.getElementById("modalDescription");
-
-    document.querySelectorAll("[data-game]").forEach(button => {
-      button.addEventListener("click", () => {
-        modalTitle.textContent = button.dataset.game;
-        modalDescription.textContent =
-          "This experience is planned for NOVARA. Its playable version will be added in the next development stage.";
-        modal.classList.add("active");
-      });
+    area.querySelectorAll("[data-answer]").forEach(button => {
+      button.addEventListener("click", () => selectQuizAnswer(Number(button.dataset.answer)));
     });
 
-    function closeGameModal() {
-      modal.classList.remove("active");
+    document.getElementById("nextQuestion").addEventListener("click", () => {
+      if (!answered) return;
+
+      questionIndex++;
+
+      if (questionIndex < game.questions.length) {
+        renderQuizQuestion();
+      } else {
+        finishGame(score, game.questions.length * 10);
+      }
+    });
+  }
+
+  function selectQuizAnswer(selected) {
+    if (answered) return;
+    answered = true;
+
+    const game = games[currentGame];
+    const question = game.questions[questionIndex];
+    const buttons = area.querySelectorAll("[data-answer]");
+    const feedback = document.getElementById("feedback");
+
+    buttons.forEach(button => {
+      const choice = Number(button.dataset.answer);
+      button.disabled = true;
+
+      if (choice === question.answer) button.classList.add("correct");
+      if (choice === selected && selected !== question.answer) {
+        button.classList.add("wrong");
+      }
+    });
+
+    if (selected === question.answer) {
+      score += 10;
+      feedback.textContent = "✓ Correct! " + question.info;
+    } else {
+      feedback.textContent = "Not quite. " + question.info;
     }
 
-    document.getElementById("closeModal").addEventListener("click", closeGameModal);
-    document.getElementById("modalAction").addEventListener("click", closeGameModal);
+    document.getElementById("nextQuestion").disabled = false;
+  }
 
-    modal.addEventListener("click", event => {
-      if (event.target === modal) closeGameModal();
-    });
+  function startMystery() {
+    title.textContent = "Mystery Room";
+    icon.textContent = "🕵️";
+    subtitle.textContent = "A fictional mystery. Choose carefully and discover the truth.";
 
-    document.addEventListener("keydown", event => {
-      if (event.key === "Escape") closeGameModal();
-    });
-  </script>
-
-</body>
-</html>
+    const scenes = [
+      {
+        text: "You enter an old library. A mysterious note says: 'The answer is hidden where time stands still.' What do you inspect?",
+        choices: [
+          ["The wall clock", 1],
+          ["The bookshelf", 2],
+          ["The window", 3]
+        ]
+      },
+      {
+        text: "Behind the clock, you discover a small key and another note: 'Find the place where stories sleep.'",
+        choices: [
+          ["The book cabinet", 1],
+          ["The garden", 2],
+          ["The kitchen", 3]
+        ]
+      },
+      {
+        text: "Insid
