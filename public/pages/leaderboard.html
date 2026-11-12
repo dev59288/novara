@@ -1,0 +1,345 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#090b18">
+  <title>Leaderboard | NOVARA</title>
+  <link rel="stylesheet" href="../styles.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    .leader-hero {
+      padding: 85px 20px 55px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .leader-hero h1 {
+      font-family: "Space Grotesk", sans-serif;
+      font-size: clamp(2.5rem, 7vw, 4.8rem);
+      line-height: 1.08;
+      margin: 16px 0;
+    }
+    .leader-hero h1 span {
+      color: #a78bfa;
+    }
+    .leader-hero p {
+      color: #a5a8bb;
+      max-width: 550px;
+      margin: auto;
+      line-height: 1.7;
+    }
+    .leader-container {
+      max-width: 1050px;
+      margin: auto;
+      padding: 10px 20px 90px;
+    }
+    .leader-tabs {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin: 20px 0 45px;
+    }
+    .leader-tab {
+      border: 1px solid rgba(255,255,255,.13);
+      background: rgba(255,255,255,.04);
+      color: #c6c6d5;
+      padding: 11px 24px;
+      border-radius: 30px;
+      cursor: pointer;
+      font-weight: 700;
+      font-family: inherit;
+      transition: .25s;
+    }
+    .leader-tab.active {
+      color: white;
+      background: linear-gradient(120deg,#7652d8,#a855f7);
+      border-color: transparent;
+      box-shadow: 0 5px 25px #8b5cf644;
+    }
+    .podium {
+      display: grid;
+      grid-template-columns: repeat(3,1fr);
+      align-items: end;
+      gap: 18px;
+      max-width: 760px;
+      margin: auto auto 55px;
+    }
+    .podium-card {
+      text-align: center;
+      padding: 25px 12px;
+      border: 1px solid rgba(255,255,255,.1);
+      background: linear-gradient(145deg,rgba(139,92,246,.13),rgba(255,255,255,.035));
+      border-radius: 22px;
+      position: relative;
+    }
+    .podium-card.first {
+      padding-top: 38px;
+      padding-bottom: 35px;
+      border-color: #b18cff88;
+      background: linear-gradient(145deg,#51318c66,#15162b);
+    }
+    .podium-card .crown {
+      font-size: 27px;
+      margin-bottom: 8px;
+    }
+    .avatar {
+      width: 65px;
+      height: 65px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      margin: 0 auto 13px;
+      font-size: 27px;
+      font-weight: 800;
+      background: linear-gradient(135deg,#8b5cf6,#36c5df);
+      border: 3px solid rgba(255,255,255,.2);
+    }
+    .first .avatar {
+      width: 78px;
+      height: 78px;
+      font-size: 32px;
+    }
+    .podium-card h3 {
+      font-size: 16px;
+      margin: 5px 0;
+    }
+    .podium-card .points {
+      color: #bba2ff;
+      font-weight: 800;
+      font-size: 14px;
+    }
+    .rank-number {
+      display: inline-block;
+      margin-top: 13px;
+      padding: 5px 14px;
+      border-radius: 20px;
+      background: rgba(255,255,255,.09);
+      font-size: 12px;
+      font-weight: 800;
+    }
+    .leader-heading {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 17px;
+      gap: 12px;
+    }
+    .leader-heading h2 {
+      font-family: "Space Grotesk",sans-serif;
+      font-size: 23px;
+    }
+    .leader-heading span {
+      color: #9295a9;
+      font-size: 12px;
+    }
+    .leader-list {
+      display: grid;
+      gap: 10px;
+    }
+    .leader-row {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      padding: 16px 19px;
+      border-radius: 16px;
+      border: 1px solid rgba(255,255,255,.08);
+      background: rgba(255,255,255,.035);
+      transition: .25s;
+    }
+    .leader-row:hover {
+      transform: translateY(-3px);
+      border-color: #8b5cf677;
+      background: rgba(139,92,246,.08);
+    }
+    .leader-rank {
+      width: 28px;
+      color: #aaaac0;
+      font-weight: 800;
+      text-align: center;
+    }
+    .leader-avatar {
+      width: 43px;
+      height: 43px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      background: linear-gradient(135deg,#33245e,#236276);
+      font-weight: 800;
+    }
+    .leader-info {
+      flex: 1;
+      min-width: 0;
+    }
+    .leader-info strong {
+      display: block;
+      font-size: 14px;
+    }
+    .leader-info small {
+      color: #9295a9;
+      font-size: 11px;
+    }
+    .leader-score {
+      color: #c4a9ff;
+      font-weight: 800;
+      font-size: 14px;
+      white-space: nowrap;
+    }
+    .demo-note {
+      text-align: center;
+      margin-top: 22px;
+      color: #85899f;
+      font-size: 12px;
+      line-height: 1.6;
+    }
+    @media(max-width:600px) {
+      .podium {gap: 8px;}
+      .podium-card {padding: 20px 5px;}
+      .podium-card.first {padding: 27px 5px;}
+      .podium-card h3 {font-size: 12px;}
+      .avatar {width: 48px;height: 48px;font-size: 20px;}
+      .first .avatar {width: 58px;height: 58px;}
+      .podium-card .points {font-size: 11px;}
+      .leader-row {padding: 13px 11px;gap: 10px;}
+      .leader-score {font-size: 12px;}
+    }
+  </style>
+</head>
+
+<body>
+  <div class="background-effects">
+    <div class="orb orb-one"></div>
+    <div class="orb orb-two"></div>
+    <div class="grid-overlay"></div>
+  </div>
+
+  <nav class="navbar">
+    <a href="../index.html" class="logo">NOVA<span>RA.</span></a>
+    <div class="nav-links">
+      <a href="../index.html">Home</a>
+      <a href="discover.html">Discover</a>
+      <a href="play.html">Play</a>
+      <a href="create.html">Create</a>
+      <a href="connect.html">Connect</a>
+    </div>
+    <a href="profile.html" class="btn btn-primary">My Space</a>
+  </nav>
+
+  <header class="leader-hero">
+    <span class="eyebrow">THE NOVARA ARENA</span>
+    <h1>Rise to the <span>Top.</span></h1>
+    <p>Play more. Discover more. Collect points. See how you rank among the NOVARA community.</p>
+  </header>
+
+  <main class="leader-container">
+    <div class="leader-tabs">
+      <button class="leader-tab active" data-period="weekly">Weekly</button>
+      <button class="leader-tab" data-period="all">All Time</button>
+    </div>
+
+    <section class="podium" id="podium"></section>
+
+    <div class="leader-heading">
+      <h2>Top Players</h2>
+      <span>XP · Experience Points</span>
+    </div>
+
+    <section class="leader-list" id="leaderList"></section>
+
+    <p class="demo-note">
+      These are sample rankings for the NOVARA preview. Real global rankings
+      will be available after accounts and the online database are connected.
+    </p>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-brand">
+      <a href="../index.html" class="logo">NOVA<span>RA.</span></a>
+      <p>Discover. Play. Create. Connect.</p>
+    </div>
+    <p>© <span id="year"></span> NOVARA. All rights reserved.</p>
+  </footer>
+
+  <script src="../js/app.js"></script>
+
+  <script>
+    const rankings = {
+      weekly: [
+        {name:"ShadowX",initial:"S",points:4850},
+        {name:"NovaQueen",initial:"N",points:4210},
+        {name:"PixelKing",initial:"P",points:3960},
+        {name:"MysticSoul",initial:"M",points:3520},
+        {name:"DarkKnight",initial:"D",points:3180},
+        {name:"NeonWolf",initial:"N",points:2940},
+        {name:"AstroBoy",initial:"A",points:2610},
+        {name:"CyberFox",initial:"C",points:2390},
+        {name:"Moonlight",initial:"M",points:2150},
+        {name:"BlazeX",initial:"B",points:1890}
+      ],
+      all: [
+        {name:"NovaQueen",initial:"N",points:28400},
+        {name:"ShadowX",initial:"S",points:26950},
+        {name:"DarkKnight",initial:"D",points:24800},
+        {name:"PixelKing",initial:"P",points:22100},
+        {name:"NeonWolf",initial:"N",points:19500},
+        {name:"MysticSoul",initial:"M",points:18300},
+        {name:"CyberFox",initial:"C",points:16400},
+        {name:"AstroBoy",initial:"A",points:14900},
+        {name:"BlazeX",initial:"B",points:12700},
+        {name:"Moonlight",initial:"M",points:11500}
+      ]
+    };
+
+    const podium = document.getElementById("podium");
+    const list = document.getElementById("leaderList");
+
+    function renderLeaderboard(period) {
+      const players = rankings[period];
+
+      const podiumOrder = [
+        {player:players[1],rank:2},
+        {player:players[0],rank:1},
+        {player:players[2],rank:3}
+      ];
+
+      podium.innerHTML = podiumOrder.map(item => `
+        <article class="podium-card ${item.rank === 1 ? "first" : ""}">
+          <div class="crown">${item.rank === 1 ? "👑" : item.rank === 2 ? "🥈" : "🥉"}</div>
+          <div class="avatar">${item.player.initial}</div>
+          <h3>${item.player.name}</h3>
+          <div class="points">${item.player.points.toLocaleString("en-IN")} XP</div>
+          <span class="rank-number">#${item.rank}</span>
+        </article>
+      `).join("");
+
+      list.innerHTML = players.slice(3).map((player,index) => `
+        <article class="leader-row">
+          <span class="leader-rank">#${index + 4}</span>
+          <div class="leader-avatar">${player.initial}</div>
+          <div class="leader-info">
+            <strong>${player.name}</strong>
+            <small>NOVARA Explorer</small>
+          </div>
+          <span class="leader-score">${player.points.toLocaleString("en-IN")} XP</span>
+        </article>
+      `).join("");
+    }
+
+    document.querySelectorAll(".leader-tab").forEach(button => {
+      button.addEventListener("click", () => {
+        document.querySelectorAll(".leader-tab").forEach(tab => {
+          tab.classList.remove("active");
+        });
+        button.classList.add("active");
+        renderLeaderboard(button.dataset.period);
+      });
+    });
+
+    document.getElementById("year").textContent = new Date().getFullYear();
+    renderLeaderboard("weekly");
+  </script>
+</body>
+</html>
