@@ -1,0 +1,211 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#090b18">
+  <title>Discover | NOVARA</title>
+  <link rel="stylesheet" href="../styles.css">
+  <style>
+    .discover-hero {
+      padding: 90px 7% 45px;
+      text-align: center;
+    }
+
+    .discover-hero h1 {
+      font: 700 clamp(42px,7vw,75px)/1.1 'Space Grotesk',sans-serif;
+      margin: 18px 0;
+    }
+
+    .discover-hero h1 span {
+      background: linear-gradient(90deg,#a78bfa,#55d6ff);
+      -webkit-background-clip: text;
+      color: transparent;
+    }
+
+    .discover-hero p {
+      color: var(--muted);
+      line-height: 1.8;
+    }
+
+    .discover-grid {
+      display: grid;
+      grid-template-columns: repeat(3,minmax(0,1fr));
+      gap: 20px;
+    }
+
+    .discover-item {
+      background: linear-gradient(145deg,#191e38,#101326);
+      border: 1px solid var(--border);
+      border-radius: 22px;
+      padding: 25px;
+      transition: .3s;
+    }
+
+    .discover-item:hover {
+      transform: translateY(-7px);
+      border-color: var(--purple);
+    }
+
+    .discover-item .visual {
+      font-size: 48px;
+      margin-bottom: 20px;
+    }
+
+    .discover-item h3 {
+      margin-bottom: 10px;
+      font: 600 21px 'Space Grotesk',sans-serif;
+    }
+
+    .discover-item p {
+      color: var(--muted);
+      line-height: 1.7;
+      font-size: 14px;
+      margin-bottom: 20px;
+    }
+
+    .discover-item button {
+      background: rgba(139,92,246,.17);
+      color: #c4b5fd;
+      padding: 12px 17px;
+      border-radius: 10px;
+      font-weight: 700;
+    }
+
+    .discover-item button:hover {
+      background: var(--purple);
+      color: white;
+    }
+
+    @media(max-width:750px) {
+      .discover-grid {
+        grid-template-columns: repeat(2,minmax(0,1fr));
+      }
+    }
+
+    @media(max-width:520px) {
+      .discover-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <header class="navbar">
+    <a href="../index.html" class="logo">NOVARA</a>
+
+    <nav class="nav-links">
+      <a href="../index.html">Home</a>
+      <a href="discover.html" class="active">Discover</a>
+      <a href="play.html">Play</a>
+      <a href="create.html">Create</a>
+      <a href="connect.html">Connect</a>
+    </nav>
+
+    <div class="nav-actions">
+      <a href="../index.html" class="btn-primary">Home ↗</a>
+    </div>
+
+    <button class="menu-btn" aria-label="Open navigation" aria-expanded="false">☰</button>
+  </header>
+
+  <main>
+    <div class="discover-hero">
+      <div class="eyebrow">THE WORLD OF DISCOVERY</div>
+      <h1>Explore the <span>Unexpected.</span></h1>
+      <p>Discover your personality, challenge your knowledge<br>and find something new every day.</p>
+    </div>
+
+    <section>
+      <div class="section-heading">
+        <div>
+          <h2>Choose your experience</h2>
+          <p>Something interesting is waiting for you.</p>
+        </div>
+      </div>
+
+      <div class="discover-grid">
+
+        <article class="discover-item">
+          <div class="visual">🧠</div>
+          <h3>Personality Quiz</h3>
+          <p>Explore your personality through fun interactive questions.</p>
+          <button data-experience="Personality Quiz">Explore →</button>
+        </article>
+
+        <article class="discover-item">
+          <div class="visual">🌍</div>
+          <h3>World Trivia</h3>
+          <p>Test what you know about the world around you.</p>
+          <button data-experience="World Trivia">Explore →</button>
+        </article>
+
+        <article class="discover-item">
+          <div class="visual">⚡</div>
+          <h3>Quick Facts</h3>
+          <p>Discover surprising facts and fascinating information.</p>
+          <button data-experience="Quick Facts">Explore →</button>
+        </article>
+
+        <article class="discover-item">
+          <div class="visual">🎬</div>
+          <h3>Movie Universe</h3>
+          <p>Explore movie-themed quizzes and entertainment challenges.</p>
+          <button data-experience="Movie Universe">Explore →</button>
+        </article>
+
+        <article class="discover-item">
+          <div class="visual">🔮</div>
+          <h3>What Are You?</h3>
+          <p>Answer creative questions and reveal your fun result.</p>
+          <button data-experience="What Are You?">Explore →</button>
+        </article>
+
+        <article class="discover-item">
+          <div class="visual">🏆</div>
+          <h3>Daily Challenge</h3>
+          <p>Take on a fresh discovery challenge every day.</p>
+          <button data-experience="Daily Challenge">Explore →</button>
+        </article>
+
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="footer-top">
+      <div>
+        <a href="../index.html" class="logo">NOVARA</a>
+        <p class="footer-description">Discover. Play. Create. Connect.</p>
+      </div>
+
+      <div class="footer-links">
+        <a href="../index.html">Home</a>
+        <a href="play.html">Play</a>
+        <a href="create.html">Create</a>
+        <a href="connect.html">Connect</a>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <span>© <span data-year></span> NOVARA</span>
+      <span>Explore your universe.</span>
+    </div>
+  </footer>
+
+  <script src="../js/app.js" defer></script>
+
+  <script>
+    document.querySelectorAll("[data-experience]").forEach(button => {
+      button.addEventListener("click", () => {
+        const name = button.dataset.experience;
+        alert(name + " experience is coming soon!");
+      });
+    });
+  </script>
+
+</body>
+</html>
